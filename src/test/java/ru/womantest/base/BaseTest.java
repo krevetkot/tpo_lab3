@@ -3,6 +3,7 @@ package ru.womantest.base;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WindowType;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -12,8 +13,20 @@ import ru.womantest.pages.LoginPage;
 import ru.womantest.util.ConfigReader;
 
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class BaseTest {
+
+    private static final Map<String, WebDriver> sharedDrivers = new HashMap<>();
+
+    static {
+        Runtime.getRuntime().addShutdownHook(new Thread(() ->
+            sharedDrivers.values().forEach(d -> {
+                try { d.quit(); } catch (Exception ignored) {}
+            })
+        ));
+    }
 
     private static final ThreadLocal<WebDriver> driverHolder = new ThreadLocal<>();
     private static final ThreadLocal<WebDriverWait> waitHolder = new ThreadLocal<>();
@@ -29,18 +42,24 @@ public abstract class BaseTest {
     }
 
     protected void initDriver(String browser) {
-        WebDriver driver;
-        if ("firefox".equalsIgnoreCase(browser)) {
-            WebDriverManager.firefoxdriver().setup();
-            driver = new FirefoxDriver(new FirefoxOptions());
+        String key = browser.toLowerCase();
+        WebDriver driver = sharedDrivers.get(key);
+        if (driver == null) {
+            if ("firefox".equalsIgnoreCase(browser)) {
+                WebDriverManager.firefoxdriver().setup();
+                driver = new FirefoxDriver(new FirefoxOptions());
+            } else {
+                WebDriverManager.chromedriver().setup();
+                ChromeOptions opts = new ChromeOptions();
+                opts.addArguments("--disable-blink-features=AutomationControlled");
+                driver = new ChromeDriver(opts);
+            }
+            driver.manage().window().maximize();
+            driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
+            sharedDrivers.put(key, driver);
         } else {
-            WebDriverManager.chromedriver().setup();
-            ChromeOptions opts = new ChromeOptions();
-            opts.addArguments("--disable-blink-features=AutomationControlled");
-            driver = new ChromeDriver(opts);
+            driver.switchTo().newWindow(WindowType.TAB);
         }
-        driver.manage().window().maximize();
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
         driverHolder.set(driver);
         waitHolder.set(new WebDriverWait(driver, Duration.ofSeconds(15)));
         driver.get(BASE_URL);
@@ -55,10 +74,11 @@ public abstract class BaseTest {
     @AfterEach
     void tearDown() {
         WebDriver d = driverHolder.get();
-        if (d != null) {
-            d.quit();
-            driverHolder.remove();
-            waitHolder.remove();
+        if (d != null && d.getWindowHandles().size() > 1) {
+            d.close();
+            d.switchTo().window(d.getWindowHandles().iterator().next());
         }
+        driverHolder.remove();
+        waitHolder.remove();
     }
 }

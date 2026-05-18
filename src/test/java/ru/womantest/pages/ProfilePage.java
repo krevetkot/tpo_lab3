@@ -49,6 +49,31 @@ public class ProfilePage extends BasePage {
         + " | //li[contains(@class,'item')]//a[@href]"
     );
 
+    private final By myProfileLink = By.xpath(
+        "//header//a[contains(@href,'/u/') or contains(@href,'/profile/')]"
+        + " | //*[contains(@class,'header')]//*[contains(@class,'avatar') or contains(@class,'nick')]//ancestor-or-self::a[1]"
+        + " | //a[contains(@class,'avatar') or contains(@class,'userbar__nick') or contains(@class,'header__user')]"
+    );
+
+    private final By topicsTabLink = By.xpath(
+        "//a[normalize-space()='Темы'][ancestor::*[contains(@class,'tab')"
+        + " or contains(@class,'nav') or contains(@class,'menu')]]"
+        + " | //button[normalize-space()='Темы']"
+        + " | //a[contains(@href,'topic') and (contains(@class,'tab') or contains(@class,'nav'))]"
+    );
+
+    private final By allTabLink = By.xpath(
+        "//a[normalize-space()='Все'][ancestor::*[contains(@class,'tab')"
+        + " or contains(@class,'nav') or contains(@class,'filter')]]"
+        + " | //button[normalize-space()='Все']"
+        + " | //span[normalize-space()='Все'][ancestor::a or ancestor::button]"
+    );
+
+    private final By moderationBadge = By.xpath(
+        "//*[contains(text(),'на модерации') or contains(text(),'модерации')"
+        + " or contains(@class,'moderat') or contains(@class,'pending')]"
+    );
+
     public ProfilePage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }
@@ -100,5 +125,35 @@ public class ProfilePage extends BasePage {
 
     public String getCurrentUrl() {
         return driver.getCurrentUrl();
+    }
+
+    public void goToMyProfile() {
+        waitClickable(myProfileLink).click();
+    }
+
+    public void goToTopicsTab() {
+        waitClickable(topicsTabLink).click();
+    }
+
+    public void goToAllTab() {
+        waitClickable(allTabLink).click();
+    }
+
+    public boolean hasTopicWithTitle(String title) {
+        return isPresent(By.xpath("//*[contains(text(),'" + title + "')]"));
+    }
+
+    public boolean hasModerationBadge() {
+        return isPresent(moderationBadge);
+    }
+
+    public boolean topicHasModerationBadge(String title) {
+        By badge = By.xpath(
+            "//*[contains(text(),'" + title + "')]"
+            + "/ancestor::*[contains(@class,'item') or contains(@class,'topic')"
+            + " or contains(@class,'thread') or contains(@class,'card')][1]"
+            + "//*[contains(text(),'на модерации') or contains(@class,'moderat')]"
+        );
+        return isPresent(badge);
     }
 }

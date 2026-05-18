@@ -8,6 +8,7 @@ import ru.womantest.base.BaseTest;
 import ru.womantest.pages.CreateTopicPage;
 import ru.womantest.pages.ForumListPage;
 import ru.womantest.pages.ForumTopicPage;
+import ru.womantest.pages.ProfilePage;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -87,6 +88,40 @@ class ForumTest extends BaseTest {
         assertTrue(
             form.hasValidationError() || form.isSubmitDisabled(),
             "Форма отправилась без заголовка — ожидалась ошибка валидации"
+        );
+    }
+
+    @ParameterizedTest(name = "[{0}] TC-25: Созданная тема появляется в профиле с плашкой «на модерации»")
+    @ValueSource(strings = {"chrome", "firefox"})
+    void tc25_createdTopicAppearsInProfileWithModerationBadge(String browser) {
+        initDriverAndLogin(browser);
+
+        String uniqueTitle = "Тест модерации_" + System.currentTimeMillis();
+
+        ForumListPage forum = new ForumListPage(driver(), getWait()).open();
+        Assumptions.assumeTrue(forum.hasCreateTopicButton(),
+            "Кнопка создания темы не найдена — тест пропущен");
+
+        CreateTopicPage form = forum.clickCreateTopic();
+        Assumptions.assumeTrue(form.isFormLoaded(),
+            "Форма создания темы не загрузилась — тест пропущен");
+
+        form.fillTitle(uniqueTitle);
+        form.fillBody("Автоматический тест проверки модерации.");
+        form.submit();
+
+        ProfilePage profile = new ProfilePage(driver(), getWait());
+        profile.goToMyProfile();
+        profile.goToTopicsTab();
+        profile.goToAllTab();
+
+        assertTrue(
+            profile.hasTopicWithTitle(uniqueTitle),
+            "Созданная тема «" + uniqueTitle + "» не найдена в разделе «Темы → Все»"
+        );
+        assertTrue(
+            profile.topicHasModerationBadge(uniqueTitle),
+            "На теме «" + uniqueTitle + "» нет плашки «на модерации»"
         );
     }
 }

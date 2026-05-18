@@ -1,6 +1,7 @@
 package ru.womantest.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -19,7 +20,8 @@ public class CreateTopicPage extends BasePage {
     );
 
     private final By submitBtn = By.xpath(
-        "//button[@type='submit' or contains(text(),'Создать') or contains(text(),'Опубликовать')]"
+        "//button[@type='submit' or contains(text(),'Создать') or contains(text(),'Опубликовать')"
+        + " or contains(text(),'Добавить')]"
     );
 
     private final By validationError = By.xpath(
@@ -43,18 +45,29 @@ public class CreateTopicPage extends BasePage {
     }
 
     public void fillBody(String body) {
-        WebElement el = waitVisible(bodyTextarea);
-        el.clear();
-        el.sendKeys(body);
+        By contentEditable = By.xpath("//div[@contenteditable='true']");
+        if (isPresent(contentEditable)) {
+            WebElement el = waitVisible(contentEditable);
+            el.click();
+            ((JavascriptExecutor) driver).executeScript("arguments[0].innerHTML = arguments[1]", el, body);
+        } else {
+            WebElement el = waitVisible(bodyTextarea);
+            el.clear();
+            el.sendKeys(body);
+        }
+    }
+
+    public void submit() {
+        waitClickable(submitBtn).click();
     }
 
     public ForumTopicPage submitAndExpectSuccess() {
-        waitClickable(submitBtn).click();
+        submit();
         return new ForumTopicPage(driver, wait);
     }
 
     public void submitAndExpectError() {
-        waitClickable(submitBtn).click();
+        submit();
     }
 
     public boolean hasValidationError() {
