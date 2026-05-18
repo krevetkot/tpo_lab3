@@ -107,7 +107,7 @@ public class MainPage extends BasePage {
 
     private void openSearchUrl(String query) {
         String encodedQuery = URLEncoder.encode(query, StandardCharsets.UTF_8);
-        driver.get(BASE_URL + "/search/?q=" + encodedQuery);
+        driver.get(BASE_URL + "/search/?q=" + encodedQuery + "&where=forum");
     }
 
     public ArticlePage openFirstArticle() {

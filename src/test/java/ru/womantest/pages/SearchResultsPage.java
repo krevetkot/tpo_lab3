@@ -7,19 +7,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class SearchResultsPage extends BasePage {
 
     private final By resultItems = By.xpath(
-        "//div[contains(@class,'result') or contains(@class,'search')]//a[@href]"
-        + " | //ul[contains(@class,'result')]//li//a[@href]"
-        + " | //article//a[@href]"
+        "//div[contains(@class,'card-list')]//a[contains(@class,'card__title-link') and @href]"
+        + " | //ul[contains(@class,'poisk-results')]//li[contains(@class,'item')]//a[@href]"
     );
 
     private final By noResultsMsg = By.xpath(
         "//*[contains(text(),'ничего не найдено') or contains(text(),'нет результатов')"
-        + " or contains(text(),'не найден') or contains(text(),'0 результатов')]"
-    );
-
-    private final By captcha = By.xpath(
-        "//*[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'captcha')"
-        + " or contains(@class,'captcha') or contains(@id,'captcha')]"
+        + " or contains(text(),'не найден') or contains(text(),'0 публикаций')]"
     );
 
     public SearchResultsPage(WebDriver driver, WebDriverWait wait) {
@@ -33,10 +27,6 @@ public class SearchResultsPage extends BasePage {
 
     public boolean hasNoResultsMessage() {
         return isPresent(noResultsMsg);
-    }
-
-    public boolean hasCaptcha() {
-        return isPresent(captcha);
     }
 
     public String getCurrentUrl() {
