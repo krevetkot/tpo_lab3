@@ -16,7 +16,7 @@ public class ForumTopicPage extends BasePage {
 
     private final By replyTextarea = By.xpath(
         "//textarea[contains(@class,'reply') or contains(@class,'message')"
-        + " or contains(@placeholder,'ообщение') or contains(@placeholder,'твет')]"
+        + " or contains(@placeholder,'сообщение') or contains(@placeholder,'ответ')]"
         + " | //div[@contenteditable='true'][contains(@class,'editor')]"
     );
 

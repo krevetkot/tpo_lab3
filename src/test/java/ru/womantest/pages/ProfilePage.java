@@ -10,8 +10,11 @@ import java.util.List;
 public class ProfilePage extends BasePage {
 
     private final By notifIcon = By.xpath(
-        "//a[contains(@class,'notif') or contains(@class,'bell') or @aria-label='Уведомления']"
-        + " | //button[contains(@class,'notif') or contains(@class,'bell')]"
+        "//a[contains(@class,'notif') or contains(@class,'notification') or contains(@class,'bell')"
+        + " or contains(@href,'notif') or contains(@href,'notification') or @aria-label='Уведомления']"
+        + " | //button[contains(@class,'notif') or contains(@class,'notification') or contains(@class,'bell')"
+        + " or @aria-label='Уведомления']"
+        + " | //header//*[contains(@class,'notif') or contains(@class,'notification') or contains(@class,'bell')]"
     );
 
     private final By notifDropdown = By.xpath(

@@ -4,8 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.List;
-
 public class SearchResultsPage extends BasePage {
 
     private final By resultItems = By.xpath(
@@ -19,6 +17,11 @@ public class SearchResultsPage extends BasePage {
         + " or contains(text(),'не найден') or contains(text(),'0 результатов')]"
     );
 
+    private final By captcha = By.xpath(
+        "//*[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'captcha')"
+        + " or contains(@class,'captcha') or contains(@id,'captcha')]"
+    );
+
     public SearchResultsPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }
@@ -30,6 +33,10 @@ public class SearchResultsPage extends BasePage {
 
     public boolean hasNoResultsMessage() {
         return isPresent(noResultsMsg);
+    }
+
+    public boolean hasCaptcha() {
+        return isPresent(captcha);
     }
 
     public String getCurrentUrl() {

@@ -3,6 +3,7 @@ package ru.womantest.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
@@ -68,7 +69,9 @@ public class ArticlePage extends BasePage {
     }
 
     public String clickFirstTagAndGetUrl() {
+        String oldUrl = driver.getCurrentUrl();
         getTags().get(0).click();
+        wait.until(ExpectedConditions.not(ExpectedConditions.urlToBe(oldUrl)));
         return driver.getCurrentUrl();
     }
 
@@ -81,7 +84,9 @@ public class ArticlePage extends BasePage {
     }
 
     public String clickBreadcrumb(int index) {
+        String oldUrl = driver.getCurrentUrl();
         getBreadcrumbs().get(index).click();
+        wait.until(ExpectedConditions.not(ExpectedConditions.urlToBe(oldUrl)));
         return driver.getCurrentUrl();
     }
 
@@ -94,7 +99,9 @@ public class ArticlePage extends BasePage {
     }
 
     public String clickFirstRelatedLink() {
+        String oldUrl = driver.getCurrentUrl();
         waitClickable(relatedLinks).click();
+        wait.until(ExpectedConditions.not(ExpectedConditions.urlToBe(oldUrl)));
         return driver.getCurrentUrl();
     }
 

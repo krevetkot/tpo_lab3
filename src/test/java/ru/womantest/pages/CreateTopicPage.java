@@ -9,13 +9,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class CreateTopicPage extends BasePage {
 
     private final By titleInput = By.xpath(
-        "//input[@name='title' or @name='subject' or @placeholder[contains(.,'аголовок')"
-        + " or contains(.,'ема')]]"
+        "//input[@name='title' or @name='subject' or contains(@placeholder,'заголовок')"
+        + " or contains(@placeholder,'тема') or contains(@placeholder,'Тема')]"
     );
 
     private final By bodyTextarea = By.xpath(
         "//textarea[@name='body' or @name='text' or @name='message'"
-        + " or contains(@placeholder,'текст') or contains(@placeholder,'ообщение')]"
+        + " or contains(@placeholder,'текст') or contains(@placeholder,'сообщение')]"
         + " | //div[@contenteditable='true']"
     );
 

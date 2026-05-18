@@ -10,10 +10,17 @@ public class ConfigReader {
 
     public ConfigReader() {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("test.properties")) {
-            props.load(is);
+            if (is != null) {
+                props.load(is);
+            }
         } catch (IOException e) {
             throw new RuntimeException("Failed to load test.properties", e);
         }
+    }
+
+    public boolean hasCredentials() {
+        return getEmail() != null && !getEmail().isBlank()
+            && getPassword() != null && !getPassword().isBlank();
     }
 
     public String getEmail() {

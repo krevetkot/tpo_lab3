@@ -26,6 +26,10 @@ public abstract class BasePage {
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 
+    protected WebElement waitPresent(By locator) {
+        return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+    }
+
     protected boolean isPresent(By locator) {
         return !driver.findElements(locator).isEmpty();
     }
