@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0534b4e6-322c-4cfe-8930-5b7c84c0b349" name="Changes" comment="тестам получше">
+    <list default="true" id="0534b4e6-322c-4cfe-8930-5b7c84c0b349" name="Changes" comment="article test проходят, кроме 10. forum test с юзером не проходят. profile test полностью падает, search test норм">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/ArticlePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/ArticlePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/MainPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/ArticleTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/ArticleTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/NavigationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/NavigationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/ProfilePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/ProfilePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/ProfileTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/ProfileTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,9 +73,35 @@
     <option name="myCommands">
       <command value="gradle test" />
       <command value="gradle cleanTest test" />
+      <command value="gradle cleanTest test ProfileTest" />
+      <command value="gradle test --tests &quot;ru.womantest.tests.ProfileTest&quot;" />
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.tpo_lab3 [cleanTest test]">
+  <component name="RunManager" selected="Gradle.tpo_lab3 [test --tests &quot;ru.womantest.tests.ProfileTest&quot;]">
+    <configuration name="tpo_lab3 [cleanTest test ProfileTest]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="cleanTest" />
+            <option value="test" />
+            <option value="ProfileTest" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
     <configuration name="tpo_lab3 [cleanTest test]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -91,6 +115,30 @@
           <list>
             <option value="cleanTest" />
             <option value="test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="tpo_lab3 [test --tests &quot;ru.womantest.tests.ProfileTest&quot;]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="test" />
+            <option value="--tests" />
+            <option value="&quot;ru.womantest.tests.ProfileTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -125,6 +173,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.tpo_lab3 [test --tests &quot;ru.womantest.tests.ProfileTest&quot;]" />
+        <item itemvalue="Gradle.tpo_lab3 [cleanTest test ProfileTest]" />
         <item itemvalue="Gradle.tpo_lab3 [cleanTest test]" />
         <item itemvalue="Gradle.tpo_lab3 [test]" />
       </list>
@@ -142,7 +192,7 @@
       <workItem from="1779109022273" duration="3429000" />
       <workItem from="1779122229360" duration="86000" />
       <workItem from="1779185292330" duration="792000" />
-      <workItem from="1779186881611" duration="8835000" />
+      <workItem from="1779186881611" duration="15051000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -176,7 +226,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779192575355</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="article test проходят, кроме 10. forum test с юзером не проходят. profile test полностью падает, search test норм">
+      <option name="closed" value="true" />
+      <created>1779196706574</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1779196706574</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -187,6 +245,7 @@
     <MESSAGE value="first version" />
     <MESSAGE value="add TS" />
     <MESSAGE value="тестам получше" />
-    <option name="LAST_COMMIT_MESSAGE" value="тестам получше" />
+    <MESSAGE value="article test проходят, кроме 10. forum test с юзером не проходят. profile test полностью падает, search test норм" />
+    <option name="LAST_COMMIT_MESSAGE" value="article test проходят, кроме 10. forum test с юзером не проходят. profile test полностью падает, search test норм" />
   </component>
 </project>
