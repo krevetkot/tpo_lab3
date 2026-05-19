@@ -9,6 +9,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -79,7 +80,7 @@ public abstract class BaseTest {
         driver.manage().timeouts().scriptTimeout(Duration.ofSeconds(15));
         driverHolder.set(driver);
         waitHolder.set(new WebDriverWait(driver, Duration.ofSeconds(20)));
-        driver.get(BASE_URL);
+        openUrl(driver, BASE_URL);
         handleCaptchaIfPresent(driverHolder.get());
         dismissPopupsIfPresent(driverHolder.get());
     }
@@ -139,6 +140,18 @@ public abstract class BaseTest {
                 .until(ExpectedConditions.elementToBeClickable(locator));
             ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btn);
         } catch (Exception ignored) {}
+    }
+
+    protected void openUrl(String url) {
+        openUrl(driver(), url);
+    }
+
+    private void openUrl(WebDriver driver, String url) {
+        try {
+            driver.get(url);
+        } catch (TimeoutException ignored) {
+            ((JavascriptExecutor) driver).executeScript("window.stop();");
+        }
     }
 
     private void handleCaptchaIfPresent(WebDriver driver) {

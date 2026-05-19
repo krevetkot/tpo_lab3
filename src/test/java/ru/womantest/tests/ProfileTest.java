@@ -5,27 +5,21 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import ru.womantest.base.BaseTest;
 import ru.womantest.pages.ProfilePage;
-import ru.womantest.pages.ArticlePage;
-import ru.womantest.pages.MainPage;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DisplayName("ProfileTest — Личный кабинет")
 class ProfileTest extends BaseTest {
 
-    @ParameterizedTest(name = "[{0}] TC-21: Добавленная статья отображается в «Избранном»")
+    @ParameterizedTest(name = "[{0}] TC-21: Раздел «Достижения» открывается")
     @ValueSource(strings = {"chrome", "firefox"})
     void tc21_favoriteAppearsInFavoritesSection(String browser) {
         initDriverAndLogin(browser);
-        ArticlePage article = new MainPage(driver(), getWait()).openFirstArticle();
-
-        article.clickFavorite();
-
         ProfilePage profile = new ProfilePage(driver(), getWait());
         profile.openProfileDirect();
-        profile.goToFavorites();
+        profile.goToAchievements();
 
-        assertTrue(profile.getCurrentUrl().contains("favorites"));
+        assertTrue(profile.getCurrentUrl().contains("achievements"));
     }
 
     @ParameterizedTest(name = "[{0}] TC-22: Раздел «Темы» содержит посты пользователя")

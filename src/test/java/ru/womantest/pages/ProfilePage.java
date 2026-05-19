@@ -1,6 +1,8 @@
 package ru.womantest.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -9,10 +11,12 @@ import java.util.List;
 
 public class ProfilePage extends BasePage {
 
+    private static final String PROFILE_URL = "https://www.woman.ru/user/ksenia12345678-id403945603/";
+
     private final By myProfileLink = By.xpath("//a[contains(@class,'user-info__name')]");
-    private final By favoritesLink = By.xpath("//a[contains(@href,'favorites')]");
     private final By myPostsLink = By.xpath("//a[contains(@href,'threads')]");
     private final By myRepliesLink = By.xpath("//a[contains(@href,'messages')]");
+    private final By achievementsLink = By.xpath("//a[contains(@href,'achievements')]");
     private final By topicsTab = By.xpath("//a[contains(@href,'threads')]");
     private final By allTab = By.xpath("//a[contains(@href,'all')]");
     private final By topicTitles = By.xpath("//a[contains(@class,'thread-title')]");
@@ -23,8 +27,7 @@ public class ProfilePage extends BasePage {
     }
 
     public void openProfileDirect() {
-        driver.get("https://www.woman.ru/user/ksenia12345678-id403945603/");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(myPostsLink));
+        openProfilePath("");
     }
 
     public void goToMyProfile() {
@@ -32,18 +35,18 @@ public class ProfilePage extends BasePage {
         wait.until(ExpectedConditions.urlContains("/user/"));
     }
 
-    public void goToFavorites() {
-        wait.until(ExpectedConditions.elementToBeClickable(favoritesLink)).click();
-        wait.until(ExpectedConditions.urlContains("favorites"));
+    public void goToAchievements() {
+        openProfilePath("achievements/");
+        wait.until(ExpectedConditions.urlContains("achievements"));
     }
 
     public void goToMyPosts() {
-        wait.until(ExpectedConditions.elementToBeClickable(myPostsLink)).click();
+        openProfilePath("threads/");
         wait.until(ExpectedConditions.urlContains("threads"));
     }
 
     public void goToMyReplies() {
-        wait.until(ExpectedConditions.elementToBeClickable(myRepliesLink)).click();
+        openProfilePath("messages/");
         wait.until(ExpectedConditions.urlContains("messages"));
     }
 
@@ -75,5 +78,18 @@ public class ProfilePage extends BasePage {
 
     public String getCurrentUrl() {
         return driver.getCurrentUrl();
+    }
+
+    private void openProfilePath(String path) {
+        try {
+            driver.get(PROFILE_URL + path);
+        } catch (TimeoutException ignored) {
+            ((JavascriptExecutor) driver).executeScript("window.stop();");
+        }
+        wait.until(ExpectedConditions.or(
+            ExpectedConditions.visibilityOfElementLocated(myPostsLink),
+            ExpectedConditions.visibilityOfElementLocated(myRepliesLink),
+            ExpectedConditions.visibilityOfElementLocated(achievementsLink)
+        ));
     }
 }

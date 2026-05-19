@@ -38,10 +38,10 @@ public class ArticlePage extends BasePage {
     );
 
     private final By favoriteBtn = By.xpath(
-        "//button[contains(@class,'favorites')"
-        + " or contains(@aria-label,'Избранное'" +
-                ")]"
-        + " | //a[contains(@class,'favorites')"
+        "//button[contains(@class,'favorite') or contains(@class,'bookmark')"
+        + " or contains(@aria-label,'Избранное') or contains(@title,'Избранное')]"
+        + " | //a[contains(@class,'favorite') or contains(@class,'bookmark')"
+        + " or contains(@aria-label,'Избранное') or contains(@title,'Избранное')]"
     );
 
     public ArticlePage(WebDriver driver, WebDriverWait wait) {
