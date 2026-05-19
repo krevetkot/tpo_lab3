@@ -65,7 +65,7 @@ class ArticleTest extends BaseTest {
     void tc12_articleHasRelatedLinks(String browser) {
         ArticlePage article = openArticle(browser);
         Assumptions.assumeTrue(article.hasRelatedLinks(),
-            "Блок похожих материалов не найден — возможно, XPath нужно скорректировать под реальный сайт");
+            "Блок похожих материалов не найден.");
 
         assertTrue(article.getRelatedLinkCount() > 0, "Блок похожих материалов пустой");
     }

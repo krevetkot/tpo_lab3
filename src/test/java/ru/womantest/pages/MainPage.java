@@ -1,6 +1,7 @@
 package ru.womantest.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -64,10 +65,15 @@ public class MainPage extends BasePage {
     }
 
     public void clickNavItemByText(String text) {
+        String upper = text.toUpperCase();
         By byText = By.xpath(
-            "//nav//a[normalize-space()='" + text + "']"
-            + " | //ul[contains(@class,'menu')]//a[normalize-space()='" + text + "']"
-            + " | //header//a[normalize-space()='" + text + "']"
+            "//header//a[normalize-space()='" + upper + "' or normalize-space()='" + text + "'"
+                + " or contains(normalize-space(),'" + text + "')]"
+            + " | //nav//a[normalize-space()='" + upper + "' or normalize-space()='" + text + "'"
+                + " or contains(normalize-space(),'" + text + "')]"
+            + " | //ul[contains(@class,'menu')]//a[normalize-space()='" + upper
+                + "' or normalize-space()='" + text + "'"
+                + " or contains(normalize-space(),'" + text + "')]"
         );
         WebElement link = waitPresent(byText);
         String href = link.getAttribute("href");
@@ -111,7 +117,9 @@ public class MainPage extends BasePage {
     }
 
     public ArticlePage openFirstArticle() {
-        waitClickable(firstArticleLink).click();
+        WebElement link = waitPresent(firstArticleLink);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", link);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", link);
         return new ArticlePage(driver, wait);
     }
 }

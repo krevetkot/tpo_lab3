@@ -4,13 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0534b4e6-322c-4cfe-8930-5b7c84c0b349" name="Changes" comment="first version">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+    <list default="true" id="0534b4e6-322c-4cfe-8930-5b7c84c0b349" name="Changes" comment="add TS">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/base/BaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/base/BaseTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/CreateTopicPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/CreateTopicPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/ProfilePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/ProfilePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/ForumTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/ForumTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/ArticlePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/ArticlePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/LoginPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/LoginPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/MainPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/ArticleTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/ArticleTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,22 +51,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/User/java_workspace/6sem/tpo_lab3",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/java_workspace/6sem/tpo_lab3&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\User\java_workspace\6sem\tpo_lab3" />
@@ -74,9 +75,33 @@
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="gradle test" />
+      <command value="gradle cleanTest test" />
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Gradle.tpo_lab3 [cleanTest test]">
+    <configuration name="tpo_lab3 [cleanTest test]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="cleanTest" />
+            <option value="test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
     <configuration name="tpo_lab3 [test]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -101,6 +126,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.tpo_lab3 [cleanTest test]" />
         <item itemvalue="Gradle.tpo_lab3 [test]" />
       </list>
     </recent_temporary>
@@ -115,6 +141,9 @@
       <updated>1779009636726</updated>
       <workItem from="1779009637506" duration="8732000" />
       <workItem from="1779109022273" duration="3429000" />
+      <workItem from="1779122229360" duration="86000" />
+      <workItem from="1779185292330" duration="792000" />
+      <workItem from="1779186881611" duration="5590000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -132,7 +161,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779031428973</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="add TS">
+      <option name="closed" value="true" />
+      <created>1779122285647</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1779122285647</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -141,6 +178,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit" />
     <MESSAGE value="first version" />
-    <option name="LAST_COMMIT_MESSAGE" value="first version" />
+    <MESSAGE value="add TS" />
+    <option name="LAST_COMMIT_MESSAGE" value="add TS" />
   </component>
 </project>

@@ -13,8 +13,9 @@ import java.time.Duration;
 public class LoginPage extends BasePage {
 
     private final By loginBtn = By.xpath(
-        "/html/body/div[1]/div[2]/header/div[1]/div[1]/div/noindex/div/button"
-        + " | //button[contains(@class,'header-auth__button') and normalize-space()='Войти']"
+        "//button[contains(@class,'header-auth__button') and normalize-space()='Войти']"
+        + " | //a[contains(@class,'header-auth__button') and normalize-space()='Войти']"
+        + " | //header//button[normalize-space()='Войти' or contains(normalize-space(),'Войти')]"
     );
 
     private final By emailInput = By.xpath(

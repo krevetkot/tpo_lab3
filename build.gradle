@@ -17,6 +17,11 @@ dependencies {
     testImplementation 'io.github.bonigarcia:webdrivermanager:5.8.0'
 }
 
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
 test {
     useJUnitPlatform()
+    systemProperty 'file.encoding', 'UTF-8'
 }
