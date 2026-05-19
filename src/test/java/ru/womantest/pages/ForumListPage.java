@@ -10,20 +10,15 @@ import java.util.List;
 public class ForumListPage extends BasePage {
 
     private final By forumNavLink = By.xpath(
-        "//a[contains(@href,'forum') or contains(@href,'community')"
-        + " or normalize-space()='Форум' or normalize-space()='Форумы']"
+        "/html/body/div[1]/div[2]/header/div[2]/div[1]/div[1]/div[1]/nav/ul/li[1]/a"
     );
 
     private final By topicLinks = By.xpath(
-        "//div[contains(@class,'forum') or contains(@class,'topic')"
-        + " or contains(@class,'thread')]//a[@href]"
-        + " | //ul[contains(@class,'forum')]//a[@href]"
+        "/html/body/div[3]/div[3]/div[1]/div[3]/div[2]/div[1]/ul/li[1]/a"
     );
 
     private final By createTopicBtn = By.xpath(
-        "//a[contains(text(),'Создать тему') or contains(text(),'Новая тема')"
-        + " or contains(@class,'create') or contains(@class,'new-topic')]"
-        + " | //button[contains(text(),'Создать') or contains(text(),'Новая тема')]"
+        "/html/body/div[3]/div[2]/div[2]/button"
     );
 
     public ForumListPage(WebDriver driver, WebDriverWait wait) {
@@ -44,7 +39,13 @@ public class ForumListPage extends BasePage {
     }
 
     public ForumTopicPage openFirstTopic() {
-        waitClickable(topicLinks).click();
+        WebElement link = waitClickable(topicLinks);
+        String href = link.getAttribute("href");
+        if (href != null && !href.isBlank()) {
+            driver.get(href);
+        } else {
+            link.click();
+        }
         return new ForumTopicPage(driver, wait);
     }
 

@@ -10,38 +10,28 @@ import java.util.List;
 
 public class ArticlePage extends BasePage {
 
-    private final By title = By.xpath("//h1");
+    private final By title = By.xpath("/html/body/div[1]/div[2]/main/div/div/div[1]/div/div/article/div/div/header/div/h1");
 
-    private final By body = By.xpath(
-        "//div[contains(@class,'article-body') or contains(@class,'article__body')"
-        + " or contains(@class,'content') or contains(@class,'text')]//p[1]"
-    );
+    private final By body = By.xpath("/html/body/div[1]/div[2]/main/div/div/div[1]/div/div/article/div/div/section/div[1]/div[2]/div/div/p");
 
     private final By commentsSection = By.xpath(
-        "//div[contains(@class,'comment') or contains(@id,'comment')]"
-        + " | //section[contains(@class,'comment')]"
+        "/html/body/div[1]/div[2]/main/div/div/div[1]/div/div/article/div/div/header/div/div[2]/div/span[2]"
     );
 
     private final By tags = By.xpath(
-        "//a[contains(@class,'tag') or contains(@class,'label')]"
-        + "[ancestor::div[contains(@class,'tag') or contains(@class,'label') or contains(@class,'topic')]]"
+        "/html/body/div[1]/div[2]/main/div/div/div[1]/div/div/article/div/div/div[2]/a[1]"
     );
 
     private final By breadcrumbs = By.xpath(
-        "//nav[contains(@aria-label,'breadcrumb') or contains(@class,'breadcrumb')]//a"
-        + " | //ol[contains(@class,'breadcrumb')]//a"
-        + " | //div[contains(@class,'breadcrumb')]//a"
+        "/html/body/div[1]/div[2]/main/div/div/div[1]/div/div/article/div/div/nav/a[1]"
     );
 
     private final By relatedLinks = By.xpath(
-        "//a[contains(@class,'announce-inline-tile')][@href]"
+        "/html/body/div[1]/div[2]/main/div/div/div[1]/div/div/aside/div/div/div/div[2]/div/div[2]/div/div[1]/a"
     );
 
     private final By favoriteBtn = By.xpath(
-        "//button[contains(@class,'favorite') or contains(@class,'bookmark')"
-        + " or contains(@aria-label,'Избранное') or contains(@title,'Избранное')]"
-        + " | //a[contains(@class,'favorite') or contains(@class,'bookmark')"
-        + " or contains(@aria-label,'Избранное') or contains(@title,'Избранное')]"
+        "/html/body/div[1]/div[2]/main/div/div/div[1]/div/div/article/div/div/header/div/div[2]/button"
     );
 
     public ArticlePage(WebDriver driver, WebDriverWait wait) {

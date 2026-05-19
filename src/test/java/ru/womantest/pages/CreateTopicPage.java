@@ -9,25 +9,19 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class CreateTopicPage extends BasePage {
 
     private final By titleInput = By.xpath(
-        "//input[@name='title' or @name='subject' or contains(@placeholder,'заголовок')"
-        + " or contains(@placeholder,'тема') or contains(@placeholder,'Тема')]"
+        "/html/body/div[3]/div[2]/div[1]/form/div[1]/input"
     );
 
     private final By bodyTextarea = By.xpath(
-        "//textarea[@name='body' or @name='text' or @name='message'"
-        + " or contains(@placeholder,'текст') or contains(@placeholder,'сообщение')]"
-        + " | //div[@contenteditable='true']"
+        "/html/body/div[3]/div[2]/div[1]/form/div[2]/textarea"
     );
 
     private final By submitBtn = By.xpath(
-        "//button[@type='submit' or contains(text(),'Создать') or contains(text(),'Опубликовать')"
-        + " or contains(text(),'Добавить')]"
+        "/html/body/div[3]/div[2]/div[1]/form/div[3]/button"
     );
 
     private final By validationError = By.xpath(
-        "//*[contains(@class,'error') or contains(@class,'invalid')"
-        + " or contains(@class,'validation')]"
-        + "[not(self::input) and not(self::textarea)]"
+        "/html/body/div[3]/div[2]/div[1]/form/div[1]/div"
     );
 
     public CreateTopicPage(WebDriver driver, WebDriverWait wait) {
@@ -45,7 +39,7 @@ public class CreateTopicPage extends BasePage {
     }
 
     public void fillBody(String body) {
-        By contentEditable = By.xpath("//div[@contenteditable='true']");
+        By contentEditable = By.xpath("/html/body/div[3]/div[2]/div[1]/form/div[2]/div");
         if (isPresent(contentEditable)) {
             WebElement el = waitVisible(contentEditable);
             el.click();

@@ -7,13 +7,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class SearchResultsPage extends BasePage {
 
     private final By resultItems = By.xpath(
-        "//div[contains(@class,'card-list')]//a[contains(@class,'card__title-link') and @href]"
-        + " | //ul[contains(@class,'poisk-results')]//li[contains(@class,'item')]//a[@href]"
+        "/html/body/div[3]/div[2]/div[1]/div[2]/div[1]/div/h2/a"
     );
 
     private final By noResultsMsg = By.xpath(
-        "//*[contains(text(),'ничего не найдено') or contains(text(),'нет результатов')"
-        + " or contains(text(),'не найден') or contains(text(),'0 публикаций')]"
+        "/html/body/div[3]/div[2]/div[1]/div[2]"
     );
 
     public SearchResultsPage(WebDriver driver, WebDriverWait wait) {

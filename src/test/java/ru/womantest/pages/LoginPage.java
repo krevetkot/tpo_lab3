@@ -13,52 +13,35 @@ import java.time.Duration;
 public class LoginPage extends BasePage {
 
     private final By loginBtn = By.xpath(
-        "//button[contains(@class,'header-auth__button') and normalize-space()='Войти']"
-        + " | //a[contains(@class,'header-auth__button') and normalize-space()='Войти']"
-        + " | //header//button[normalize-space()='Войти' or contains(normalize-space(),'Войти')]"
+        "/html/body/div[1]/div[2]/header/div[1]/div[1]/div/noindex/div/button"
     );
 
     private final By emailInput = By.xpath(
-        "//div[contains(@class,'ds-auth-modal') or contains(@class,'auth-modal')]"
-        + "//input[@type='email' or @name='email' or @name='login'"
-        + " or contains(@placeholder,'mail') or contains(@placeholder,'Почта')]"
+        "/html/body/div[1]/div[2]/div[1]/div[2]/div[2]/div[1]/div[4]/div[2]/div/input"
     );
 
     private final By passwordInput = By.xpath(
-        "//div[contains(@class,'ds-auth-modal') or contains(@class,'auth-modal')]"
-        + "//input[@type='password' or contains(@placeholder,'Пароль')]"
+        "/html/body/div[1]/div[2]/div[1]/div[2]/div[2]/div[1]/div[4]/div[3]/div/input"
     );
 
     private final By consentControls = By.xpath(
-        "//div[contains(@class,'ds-auth-modal') or contains(@class,'auth-modal')]//label[contains(normalize-space(.),'Даю согласие на обработку персональных данных')"
-        + " or contains(normalize-space(.),'С Политикой обработки персональных данных согласен')]"
-        + " | //div[contains(@class,'ds-auth-modal') or contains(@class,'auth-modal')]//button[contains(normalize-space(.),'Даю согласие на обработку персональных данных')"
-        + " or contains(normalize-space(.),'С Политикой обработки персональных данных согласен')]"
-        + " | //div[contains(@class,'ds-auth-modal') or contains(@class,'auth-modal')]//span[contains(normalize-space(.),'Даю согласие на обработку персональных данных')"
-        + " or contains(normalize-space(.),'С Политикой обработки персональных данных согласен')]"
-        + "/ancestor::label[1]"
+        "/html/body/div[1]/div[2]/div[1]/div[2]/div[2]/div[1]/label[1]"
     );
 
     private final By submitBtn = By.xpath(
-        "//div[contains(@class,'ds-auth-modal') or contains(@class,'auth')]//button[not(contains(@class,'header-auth__button'))"
-        + " and (@type='submit' or contains(@class,'submit') or normalize-space()='Войти' or normalize-space()='Продолжить')]"
-        + " | //form//button[not(contains(@class,'header-auth__button'))"
-        + " and (@type='submit' or contains(@class,'submit') or normalize-space()='Войти' or normalize-space()='Продолжить')]"
+        "/html/body/div[1]/div[2]/div[1]/div[2]/div[2]/div[1]/div[4]/button"
     );
 
     private final By userAvatar = By.xpath(
-        "//header//a[contains(@class,'avatar') or contains(@class,'profile') or contains(@class,'user')]"
-        + " | //header//button[contains(@class,'avatar') or contains(@class,'profile') or contains(@class,'user')]"
-        + " | //header//*[contains(@class,'notif') or contains(@class,'notification') or contains(@class,'bell')]"
-        + " | //div[contains(@class,'user-name')]"
+        "/html/body/div[1]/div[2]/header/div[1]/div[1]/div/noindex/div"
     );
 
     private final By authModal = By.xpath(
-        "//*[contains(@class,'ds-auth-modal') or contains(@class,'auth-modal')]"
+        "/html/body/div[1]/div[2]/div[1]"
     );
 
     private final By cookieAgreeBtn = By.xpath(
-        "//div[contains(@class,'cookiesPopup')]//button[contains(normalize-space(.),'Согласен')]"
+        "/html/body/div[1]/div[2]/div[3]/button"
     );
 
     public LoginPage(WebDriver driver, WebDriverWait wait) {
