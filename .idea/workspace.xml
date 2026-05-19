@@ -4,14 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0534b4e6-322c-4cfe-8930-5b7c84c0b349" name="Changes" comment="add TS">
+    <list default="true" id="0534b4e6-322c-4cfe-8930-5b7c84c0b349" name="Changes" comment="тестам получше">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/base/BaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/base/BaseTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/ArticlePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/ArticlePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/LoginPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/LoginPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/MainPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/ArticleTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/ArticleTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/NavigationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/NavigationTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,7 +142,7 @@
       <workItem from="1779109022273" duration="3429000" />
       <workItem from="1779122229360" duration="86000" />
       <workItem from="1779185292330" duration="792000" />
-      <workItem from="1779186881611" duration="5590000" />
+      <workItem from="1779186881611" duration="8835000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -169,7 +168,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779122285647</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="тестам получше">
+      <option name="closed" value="true" />
+      <created>1779192575355</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1779192575355</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -179,6 +186,7 @@
     <MESSAGE value="initial commit" />
     <MESSAGE value="first version" />
     <MESSAGE value="add TS" />
-    <option name="LAST_COMMIT_MESSAGE" value="add TS" />
+    <MESSAGE value="тестам получше" />
+    <option name="LAST_COMMIT_MESSAGE" value="тестам получше" />
   </component>
 </project>

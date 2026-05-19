@@ -83,7 +83,7 @@ class ProfileTest extends BaseTest {
             profile.getCurrentUrl().contains("post") || profile.getCurrentUrl().contains("topic"),
             "Не перешли в раздел «Мои посты», URL: " + profile.getCurrentUrl()
         );
-        assertDoesNotThrow(() -> profile.getItems(),
+        assertDoesNotThrow(profile::getItems,
             "Ошибка при получении списка постов");
     }
 
@@ -98,7 +98,7 @@ class ProfileTest extends BaseTest {
             profile.getCurrentUrl().contains("repl") || profile.getCurrentUrl().contains("answer"),
             "Не перешли в раздел «Мои ответы», URL: " + profile.getCurrentUrl()
         );
-        assertDoesNotThrow(() -> profile.getItems(),
+        assertDoesNotThrow(profile::getItems,
             "Ошибка при получении списка ответов");
     }
 

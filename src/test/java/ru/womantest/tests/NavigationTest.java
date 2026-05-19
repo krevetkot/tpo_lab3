@@ -31,7 +31,7 @@ class NavigationTest extends BaseTest {
         MainPage page = new MainPage(driver(), getWait());
         String urlBefore = driver().getCurrentUrl();
 
-        page.clickNavItemByText("Красота");
+        page.clickNavSection("/beauty/");
 
         assertNotEquals(urlBefore, driver().getCurrentUrl(), "URL не изменился");
         assertFalse(driver().getTitle().isBlank(), "Заголовок страницы пустой");
@@ -44,7 +44,7 @@ class NavigationTest extends BaseTest {
         MainPage page = new MainPage(driver(), getWait());
         String urlBefore = driver().getCurrentUrl();
 
-        page.clickNavItemByText("Здоровье");
+        page.clickNavSection("/health/");
 
         assertNotEquals(urlBefore, driver().getCurrentUrl(), "URL не изменился");
         assertFalse(driver().getTitle().isBlank(), "Заголовок страницы пустой");
@@ -57,7 +57,7 @@ class NavigationTest extends BaseTest {
         MainPage page = new MainPage(driver(), getWait());
         String urlBefore = driver().getCurrentUrl();
 
-        page.clickNavItemByText("Отношения");
+        page.clickNavSection("/relations/");
 
         assertNotEquals(urlBefore, driver().getCurrentUrl(), "URL не изменился");
         assertFalse(driver().getTitle().isBlank(), "Заголовок страницы пустой");

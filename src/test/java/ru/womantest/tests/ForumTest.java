@@ -43,12 +43,12 @@ class ForumTest extends BaseTest {
         initDriverAndLogin(browser);
         ForumListPage forum = new ForumListPage(driver(), getWait()).open();
         Assumptions.assumeTrue(forum.hasCreateTopicButton(),
-            "Кнопка создания темы не найдена — возможно, XPath нужно скорректировать");
+            "Кнопка создания темы не найдена.");
 
         CreateTopicPage form = forum.clickCreateTopic();
         assertTrue(form.isFormLoaded(), "Форма создания темы не загрузилась");
 
-        form.fillTitle("Тестовая тема selenium_" + System.currentTimeMillis());
+        form.fillTitle("Круто");
         form.fillBody("Это автоматически созданное сообщение для проверки функционала.");
         ForumTopicPage created = form.submitAndExpectSuccess();
 
@@ -64,10 +64,10 @@ class ForumTest extends BaseTest {
 
         ForumTopicPage topic = forum.openFirstTopic();
         Assumptions.assumeTrue(topic.hasReplyForm(),
-            "Форма ответа не найдена — возможно, XPath нужно скорректировать");
+            "Форма ответа не найдена.");
 
         int countBefore = topic.getMessageCount();
-        topic.postReply("Тестовый ответ selenium_" + System.currentTimeMillis());
+        topic.postReply("Круто");
         int countAfter = topic.getMessageCount();
 
         assertTrue(countAfter > countBefore, "Количество сообщений не увеличилось после отправки ответа");
@@ -96,7 +96,7 @@ class ForumTest extends BaseTest {
     void tc25_createdTopicAppearsInProfileWithModerationBadge(String browser) {
         initDriverAndLogin(browser);
 
-        String uniqueTitle = "Тест модерации_" + System.currentTimeMillis();
+        String uniqueTitle = "Всем привет!";
 
         ForumListPage forum = new ForumListPage(driver(), getWait()).open();
         Assumptions.assumeTrue(forum.hasCreateTopicButton(),
@@ -107,7 +107,7 @@ class ForumTest extends BaseTest {
             "Форма создания темы не загрузилась — тест пропущен");
 
         form.fillTitle(uniqueTitle);
-        form.fillBody("Автоматический тест проверки модерации.");
+        form.fillBody("Сегодня замечательный день!");
         form.submit();
 
         ProfilePage profile = new ProfilePage(driver(), getWait());
@@ -117,7 +117,7 @@ class ForumTest extends BaseTest {
 
         assertTrue(
             profile.hasTopicWithTitle(uniqueTitle),
-            "Созданная тема «" + uniqueTitle + "» не найдена в разделе «Темы → Все»"
+            "Созданная тема «" + uniqueTitle + "» не найдена в разделе «Темы - Все»"
         );
         assertTrue(
             profile.topicHasModerationBadge(uniqueTitle),

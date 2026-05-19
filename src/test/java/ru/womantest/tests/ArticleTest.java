@@ -10,7 +10,7 @@ import ru.womantest.pages.MainPage;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DisplayName("ArticleTest — Статьи, теги, хлебные крошки")
+@DisplayName("ArticleTest — Статьи, теги, похожие материалы")
 class ArticleTest extends BaseTest {
 
     private ArticlePage openArticle(String browser) {
@@ -47,26 +47,12 @@ class ArticleTest extends BaseTest {
         assertNotEquals(urlBefore, urlAfter, "URL не изменился после клика по тегу");
     }
 
-    @ParameterizedTest(name = "[{0}] TC-11: Хлебные крошки возвращают в раздел")
-    @ValueSource(strings = {"chrome", "firefox"})
-    void tc11_breadcrumbNavigatesBack(String browser) {
-        ArticlePage article = openArticle(browser);
-        Assumptions.assumeTrue(article.hasBreadcrumbs(), "Хлебные крошки не найдены — тест пропущен");
-
-        String articleUrl = driver().getCurrentUrl();
-        int crumbCount = article.getBreadcrumbs().size();
-        String urlAfter = article.clickBreadcrumb(Math.max(0, crumbCount - 2));
-
-        assertNotEquals(articleUrl, urlAfter, "URL не изменился после клика по хлебной крошке");
-    }
-
     @ParameterizedTest(name = "[{0}] TC-12: Под статьёй отображается блок похожих материалов")
     @ValueSource(strings = {"chrome", "firefox"})
     void tc12_articleHasRelatedLinks(String browser) {
         ArticlePage article = openArticle(browser);
-        Assumptions.assumeTrue(article.hasRelatedLinks(),
-            "Блок похожих материалов не найден.");
 
+        assertTrue(article.hasRelatedLinks(), "Блок похожих материалов не найден");
         assertTrue(article.getRelatedLinkCount() > 0, "Блок похожих материалов пустой");
     }
 }

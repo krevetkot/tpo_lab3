@@ -34,8 +34,7 @@ public class ArticlePage extends BasePage {
     );
 
     private final By relatedLinks = By.xpath(
-        "//div[contains(@class,'related') or contains(@class,'similar')"
-        + " or contains(@class,'also') or contains(@class,'recommend')]//a[@href]"
+        "//a[contains(@class,'announce-inline-tile')][@href]"
     );
 
     private final By favoriteBtn = By.xpath(

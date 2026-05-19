@@ -64,18 +64,13 @@ public class MainPage extends BasePage {
         return getNavItems().get(index).getText().trim();
     }
 
-    public void clickNavItemByText(String text) {
-        String upper = text.toUpperCase();
-        By byText = By.xpath(
-            "//header//a[normalize-space()='" + upper + "' or normalize-space()='" + text + "'"
-                + " or contains(normalize-space(),'" + text + "')]"
-            + " | //nav//a[normalize-space()='" + upper + "' or normalize-space()='" + text + "'"
-                + " or contains(normalize-space(),'" + text + "')]"
-            + " | //ul[contains(@class,'menu')]//a[normalize-space()='" + upper
-                + "' or normalize-space()='" + text + "'"
-                + " or contains(normalize-space(),'" + text + "')]"
+    public void clickNavSection(String hrefPath) {
+        By byHref = By.xpath(
+            "//a[contains(@class,'header__nav-link') and contains(@href,'" + hrefPath + "')]"
+            + " | //nav//a[contains(@href,'" + hrefPath + "') and not(contains(@href,'.svg'))]"
+            + " | //header//a[contains(@href,'" + hrefPath + "') and not(contains(@href,'.svg')) and not(contains(@href,'#'))]"
         );
-        WebElement link = waitPresent(byText);
+        WebElement link = waitPresent(byHref);
         String href = link.getAttribute("href");
         if (href != null && !href.isBlank()) {
             driver.get(href);
