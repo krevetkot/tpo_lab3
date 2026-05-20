@@ -16,20 +16,25 @@ public class LoginPage extends BasePage {
             "/html/body/div[1]/div[2]/header/div[1]/div[1]/div/noindex/div/button"
     );
 
+    private final By nicknameSpan = By.xpath(
+            "/html/body/div[1]/div[2]/header/div[1]/div[1]/div/noindex/div/span"
+    );
+
+
     private final By emailInput = By.xpath(
-            "/html/body/div[1]/div[2]/div[1]/div[2]/div[2]/div[1]/div[4]/div[2]/div/input"
+            "/html/body/div[1]/div[2]/div[1]/div[2]/div[1]/div[2]/div[2]/div/input"
     );
 
     private final By passwordInput = By.xpath(
-            "/html/body/div[1]/div[2]/div[1]/div[2]/div[2]/div[1]/div[4]/div[3]/div/input"
+            "/html/body/div[1]/div[2]/div[1]/div[2]/div[1]/div[2]/div[3]/div/input"
     );
 
     private final By consentControls = By.xpath(
-            "/html/body/div[1]/div[2]/div[1]/div[2]/div[2]/div[1]/label[1]"
+            "/html/body/div[1]/div[2]/div[1]/div[2]/div[1]/label"
     );
 
     private final By submitBtn = By.xpath(
-            "/html/body/div[1]/div[2]/div[1]/div[2]/div[2]/div[1]/div[4]/button"
+            "/html/body/div[1]/div[2]/div[1]/div[2]/div[1]/div[2]/button"
     );
 
     private final By userAvatar = By.xpath(
@@ -73,7 +78,7 @@ public class LoginPage extends BasePage {
     }
 
     public boolean isLoggedIn() {
-        return isPresent(userAvatar);
+        return isPresent(nicknameSpan);
     }
 
     public boolean hasLoginError() {
@@ -144,7 +149,7 @@ public class LoginPage extends BasePage {
 
     private void waitLoginFinished() {
         try {
-            waitVisible(userAvatar);
+            waitVisible(nicknameSpan);
         } catch (TimeoutException ignored) {
             wait.until(ExpectedConditions.invisibilityOfElementLocated(authModal));
         }
@@ -154,10 +159,11 @@ public class LoginPage extends BasePage {
         try {
             new WebDriverWait(driver, Duration.ofSeconds(10))
                     .until(d ->
-                            !d.findElements(userAvatar).isEmpty()
+                            isPresent(nicknameSpan)
                                     || d.findElements(loginError).stream().anyMatch(WebElement::isDisplayed)
                     );
         } catch (TimeoutException ignored) {
         }
     }
+
 }

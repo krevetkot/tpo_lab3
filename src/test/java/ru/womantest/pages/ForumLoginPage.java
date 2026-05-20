@@ -108,13 +108,6 @@ public class ForumLoginPage extends BasePage {
                     clickByJs(control);
                 }
             }
-//            new WebDriverWait(driver, Duration.ofSeconds(3))
-//                    .until(ExpectedConditions.presenceOfElementLocated(consentControls2));
-//            for (WebElement control : driver.findElements(consentControls2)) {
-//                if (control.isDisplayed() && control.isEnabled()) {
-//                    clickByJs(control);
-//                }
-//            }
         } catch (TimeoutException ignored) {
         }
     }
