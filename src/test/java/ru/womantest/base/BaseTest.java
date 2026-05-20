@@ -35,18 +35,36 @@ public abstract class BaseTest {
 
     private static final Logger log = Logger.getLogger(BaseTest.class.getName());
 
+    private static final ThreadLocal<Boolean> managedExternallyHolder = new ThreadLocal<>();
     private static final ThreadLocal<WebDriver> driverHolder = new ThreadLocal<>();
     private static final ThreadLocal<WebDriverWait> waitHolder = new ThreadLocal<>();
     private static final ThreadLocal<Thread> consentWatcherHolder = new ThreadLocal<>();
 
     private static final By CONSENT_BTN = By.xpath(
             "//button[normalize-space()='Consent']"
+                    + " | //button[normalize-space()='Accept all']"
+                    + " | //button[normalize-space()='Принять все']"
     );
 
     protected static final String BASE_URL = "https://www.woman.ru";
 
     protected WebDriver driver() {
         return driverHolder.get();
+    }
+
+    protected void setManagedExternally() {
+        managedExternallyHolder.set(true);
+    }
+
+    protected void quitDriver() {
+        stopConsentWatcher();
+        WebDriver driver = driverHolder.get();
+        if (driver != null) {
+            driver.quit();
+        }
+        driverHolder.remove();
+        waitHolder.remove();
+        managedExternallyHolder.remove();
     }
 
     protected WebDriverWait getWait() {
@@ -290,6 +308,9 @@ public abstract class BaseTest {
 
     @AfterEach
     void tearDown(TestInfo testInfo) {
+        if (Boolean.TRUE.equals(managedExternallyHolder.get())) {
+            return;
+        }
         stopConsentWatcher();
         WebDriver driver = driverHolder.get();
         if (driver != null) {

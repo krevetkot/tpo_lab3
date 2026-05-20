@@ -3,6 +3,7 @@ package ru.womantest.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class ForumListPage extends BasePage {
     );
 
     private final By createTopicBtn = By.xpath(
-        "/html/body/div[3]/div[2]/div[2]/button"
+        "/html/body/div[3]/div[3]/div[1]/div[1]/div/div[2]/div[2]/div[2]/button"
     );
 
     public ForumListPage(WebDriver driver, WebDriverWait wait) {
@@ -27,6 +28,10 @@ public class ForumListPage extends BasePage {
 
     public ForumListPage open() {
         waitClickable(forumNavLink).click();
+        wait.until(ExpectedConditions.or(
+                ExpectedConditions.visibilityOfElementLocated(createTopicBtn),
+                ExpectedConditions.visibilityOfElementLocated(topicLinks)
+        ));
         return this;
     }
 

@@ -4,10 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0534b4e6-322c-4cfe-8930-5b7c84c0b349" name="Changes" comment="почти вся регистрация готова">
+    <list default="true" id="0534b4e6-322c-4cfe-8930-5b7c84c0b349" name="Changes" comment="регистрация готова!">
+      <change afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/ForumChromeTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/ForumFirefoxTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/ProfileChromeTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/ProfileFirefoxTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/RegistrationPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/RegistrationPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/RegistrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/RegistrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/base/BaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/base/BaseTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/CreateTopicPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/CreateTopicPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/ForumListPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/ForumListPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/ProfilePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/ProfilePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/ForumTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,6 +84,9 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\User\java_workspace\6sem\tpo_lab3" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="ru.womantest.tests" />
+    </key>
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
@@ -86,8 +96,8 @@
       <command value="gradle test --tests &quot;ru.womantest.tests.ProfileTest&quot;" />
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.RegistrationTest.tc34_registrationWithExistingNicknameShowsError">
-    <configuration name="RegistrationTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.ForumChromeTest">
+    <configuration name="ForumChromeTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -100,7 +110,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;ru.womantest.tests.RegistrationTest&quot;" />
+            <option value="&quot;ru.womantest.tests.ForumChromeTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -111,7 +121,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="RegistrationTest.tc26_newUserRegistrationStopsAtEmailConfirmation" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ForumChromeTest.tc13_forumHasTopics" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -124,7 +134,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;ru.womantest.tests.RegistrationTest.tc26_newUserRegistrationStopsAtEmailConfirmation&quot;" />
+            <option value="&quot;ru.womantest.tests.ForumChromeTest.tc13_forumHasTopics&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -135,7 +145,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="RegistrationTest.tc33_registrationWithExistingEmailShowsError (1)" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ForumChromeTest.tc15_authorizedUserCreatesTopic" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -148,7 +158,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;ru.womantest.tests.RegistrationTest.tc33_registrationWithExistingEmailShowsError[2]&quot;" />
+            <option value="&quot;ru.womantest.tests.ForumChromeTest.tc15_authorizedUserCreatesTopic&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -159,7 +169,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="RegistrationTest.tc33_registrationWithExistingEmailShowsError" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ProfileChromeTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -172,7 +182,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;ru.womantest.tests.RegistrationTest.tc33_registrationWithExistingEmailShowsError&quot;" />
+            <option value="&quot;ru.womantest.tests.ProfileChromeTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -183,7 +193,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="RegistrationTest.tc34_registrationWithExistingNicknameShowsError" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ProfileChromeTest.tc35_profileAllTabIsNotEmpty" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -196,7 +206,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;ru.womantest.tests.RegistrationTest.tc34_registrationWithExistingNicknameShowsError&quot;" />
+            <option value="&quot;ru.womantest.tests.ProfileChromeTest.tc35_profileAllTabIsNotEmpty&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -209,11 +219,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.RegistrationTest.tc34_registrationWithExistingNicknameShowsError" />
-        <item itemvalue="Gradle.RegistrationTest.tc26_newUserRegistrationStopsAtEmailConfirmation" />
-        <item itemvalue="Gradle.RegistrationTest" />
-        <item itemvalue="Gradle.RegistrationTest.tc33_registrationWithExistingEmailShowsError" />
-        <item itemvalue="Gradle.RegistrationTest.tc33_registrationWithExistingEmailShowsError (1)" />
+        <item itemvalue="Gradle.ForumChromeTest" />
+        <item itemvalue="Gradle.ForumChromeTest.tc15_authorizedUserCreatesTopic" />
+        <item itemvalue="Gradle.ForumChromeTest.tc13_forumHasTopics" />
+        <item itemvalue="Gradle.ProfileChromeTest" />
+        <item itemvalue="Gradle.ProfileChromeTest.tc35_profileAllTabIsNotEmpty" />
       </list>
     </recent_temporary>
   </component>
@@ -231,7 +241,7 @@
       <workItem from="1779185292330" duration="792000" />
       <workItem from="1779186881611" duration="15051000" />
       <workItem from="1779260983576" duration="1002000" />
-      <workItem from="1779262557075" duration="12992000" />
+      <workItem from="1779262557075" duration="19636000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -297,7 +307,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779277589803</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="регистрация готова!">
+      <option name="closed" value="true" />
+      <created>1779278254622</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1779278254622</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -312,6 +330,7 @@
     <MESSAGE value="господи логин проходит" />
     <MESSAGE value="успешная авторизация на форуме и главной странице" />
     <MESSAGE value="почти вся регистрация готова" />
-    <option name="LAST_COMMIT_MESSAGE" value="почти вся регистрация готова" />
+    <MESSAGE value="регистрация готова!" />
+    <option name="LAST_COMMIT_MESSAGE" value="регистрация готова!" />
   </component>
 </project>
