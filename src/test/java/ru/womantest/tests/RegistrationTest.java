@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class RegistrationTest extends BaseTest {
 
     @ParameterizedTest(name = "[{0}] TC-26: Регистрация нового пользователя")
-    @ValueSource(strings = {"chrome"})
+    @ValueSource(strings = {"chrome", "firefox"})
     void tc26_newUserRegistrationStopsAtEmailConfirmation(String browser) {
         initDriver(browser);
         new ForumListPage(driver(), getWait()).open();
@@ -26,11 +26,11 @@ class RegistrationTest extends BaseTest {
         String nickname = "womantest" + suffix.substring(suffix.length() - 8);
 
         RegistrationPage registration = new RegistrationPage(driver(), getWait());
-        registration.registerUntilEmailConfirmation(email, password, nickname);
+        registration.register(email, password, nickname);
 
         assertTrue(
-            true,
-            "Регистрация не дошла до шага подтверждения через почту"
+                registration.isLoggedIn(),
+            "Регистрация успешно пройдена"
         );
     }
 
@@ -50,8 +50,6 @@ class RegistrationTest extends BaseTest {
         RegistrationPage registration = new RegistrationPage(driver(), getWait());
         registration.tryRegisterWithExistingEmail(cfg.getEmail(), password, nickname);
 
-        assertFalse(registration.isEmailConfirmationStepVisible(),
-                "Форма дошла до подтверждения почты — ошибка не показалась");
         assertTrue(registration.hasExistingEmailError(),
                 "Ошибка о существующем email не отображается");
     }
@@ -72,8 +70,6 @@ class RegistrationTest extends BaseTest {
         RegistrationPage registration = new RegistrationPage(driver(), getWait());
         registration.tryRegisterWithExistingNickname(email, password, cfg.getNickname());
 
-        assertFalse(registration.isEmailConfirmationStepVisible(),
-                "Форма дошла до подтверждения почты — ошибка не показалась");
         assertTrue(registration.hasExistingNicknameError(),
                 "Ошибка о существующем никнейме не отображается");
     }

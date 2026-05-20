@@ -56,18 +56,27 @@ public class RegistrationPage extends BasePage {
             "/html/body/div[5]/form/div/div[2]/div[4]/div[2]/div/div"
     );
 
+    private final By forumModal = By.xpath(
+            "/html/body/div[5]/form/div/div[2]"
+    );
+
+    private final By anonymousBlock = By.xpath(
+            "/html/body/div[3]/header/div/div[1]/div/div/div[1]/div[2]/div[2]"
+    );
+
+
     public RegistrationPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }
 
-    public void registerUntilEmailConfirmation(String email, String password, String nickname) {
+    public void register(String email, String password, String nickname) {
         acceptCookies();
         openRegistrationForm();
         fillIfPresent(emailInput, email);
         fillIfPresent(nameInput, nickname);
         acceptPersonalDataConsents();
         clickSubmitIfPresent();
-        waitForEmailConfirmationStep();
+        waitRegistrationFinished();
     }
 
     public boolean isEmailConfirmationStepVisible() {
@@ -138,7 +147,16 @@ public class RegistrationPage extends BasePage {
     }
 
     private void waitForEmailConfirmationStep() {
-        waitVisibleWithConsentRetry(emailConfirmationMessage);
+        waitVisible(emailConfirmationMessage);
+    }
+
+    private void waitRegistrationFinished() {
+        try {
+            new WebDriverWait(driver, Duration.ofSeconds(15))
+                    .until(d -> !isPresent(anonymousBlock));
+        } catch (TimeoutException ignored) {
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(forumModal));
+        }
     }
 
     private void clickByJs(WebElement element) {
@@ -187,6 +205,10 @@ public class RegistrationPage extends BasePage {
                     .until(ExpectedConditions.visibilityOfElementLocated(existingNicknameError));
             return false;
         }
+    }
+
+    public boolean isLoggedIn() {
+        return !isPresent(anonymousBlock);
     }
 
 }
