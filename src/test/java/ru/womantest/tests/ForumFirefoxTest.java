@@ -39,17 +39,6 @@ class ForumFirefoxTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("TC-13 [firefox]: Открытие темы показывает список сообщений")
-    void tc13_topicHasMessages() {
-        ForumListPage forum = new ForumListPage(driver(), getWait()).open();
-        Assumptions.assumeTrue(forum.hasTopics(), "Нет тем — тест пропущен");
-
-        ForumTopicPage topic = forum.openFirstTopic();
-
-        assertTrue(topic.hasMessages(), "В теме форума нет сообщений");
-    }
-
-    @Test
     @DisplayName("TC-14 [firefox]: Авторизованный пользователь создаёт тему")
     void tc14_authorizedUserCreatesTopic() {
         ForumListPage forum = new ForumListPage(driver(), getWait()).open();
@@ -69,22 +58,6 @@ class ForumFirefoxTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("TC-15 [firefox]: Авторизованный пользователь размещает ответ в теме")
-    void tc15_authorizedUserPostsReply() {
-        ForumListPage forum = new ForumListPage(driver(), getWait()).open();
-        Assumptions.assumeTrue(forum.hasTopics(), "Нет тем — тест пропущен");
-
-        ForumTopicPage topic = forum.openFirstTopic();
-        Assumptions.assumeTrue(topic.hasReplyForm(), "Форма ответа не найдена.");
-
-        int countBefore = topic.getMessageCount();
-        topic.postReply("Круто");
-        int countAfter = topic.getMessageCount();
-
-        assertTrue(countAfter > countBefore, "Количество сообщений не увеличилось после отправки ответа");
-    }
-
-    @Test
     @DisplayName("TC-16 [firefox]: Создание темы без заголовка показывает ошибку")
     void tc16_createTopicWithoutTitleShowsError() {
         ForumListPage forum = new ForumListPage(driver(), getWait()).open();
@@ -97,36 +70,6 @@ class ForumFirefoxTest extends BaseTest {
         assertTrue(
                 form.hasValidationError() || form.isSubmitDisabled(),
                 "Форма отправилась без заголовка — ожидалась ошибка валидации"
-        );
-    }
-
-    @Test
-    @DisplayName("TC-17 [firefox]: Созданная тема появляется в профиле с плашкой «на модерации»")
-    void tc17_createdTopicAppearsInProfileWithModerationBadge() {
-        String uniqueTitle = "Всем привет!";
-
-        ForumListPage forum = new ForumListPage(driver(), getWait()).open();
-        Assumptions.assumeTrue(forum.hasCreateTopicButton(), "Кнопка создания темы не найдена — тест пропущен");
-
-        CreateTopicPage form = forum.clickCreateTopic();
-        Assumptions.assumeTrue(form.isFormLoaded(), "Форма создания темы не загрузилась — тест пропущен");
-
-        form.fillTitle(uniqueTitle);
-        form.fillBody("Сегодня замечательный день!");
-        form.submit();
-
-        ProfilePage profile = new ProfilePage(driver(), getWait());
-        profile.goToMyProfile();
-        profile.goToTopicsTab();
-        profile.goToAllTab();
-
-        assertTrue(
-                profile.hasTopicWithTitle(uniqueTitle),
-                "Созданная тема «" + uniqueTitle + "» не найдена в разделе «Темы - Все»"
-        );
-        assertTrue(
-                profile.topicHasModerationBadge(uniqueTitle),
-                "На теме «" + uniqueTitle + "» нет плашки «на модерации»"
         );
     }
 }

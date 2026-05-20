@@ -81,11 +81,6 @@ public class CreateTopicPage extends BasePage {
         dismissPostSubmitModals();
     }
 
-    public ForumTopicPage submitAndExpectSuccess() {
-        submit();
-        return new ForumTopicPage(driver, wait);
-    }
-
     public void submitAndExpectError() {
         waitClickable(submitBtn).click();
     }

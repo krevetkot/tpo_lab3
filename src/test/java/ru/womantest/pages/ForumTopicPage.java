@@ -56,10 +56,6 @@ public class ForumTopicPage extends BasePage {
         submitReply();
     }
 
-    public String getFirstAuthorName() {
-        return waitVisible(firstAuthorName).getText().trim();
-    }
-
     public int getMessageCount() {
         return driver.findElements(messages).size();
     }

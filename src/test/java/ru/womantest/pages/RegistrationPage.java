@@ -146,10 +146,6 @@ public class RegistrationPage extends BasePage {
         }
     }
 
-    private void waitForEmailConfirmationStep() {
-        waitVisible(emailConfirmationMessage);
-    }
-
     private void waitRegistrationFinished() {
         try {
             new WebDriverWait(driver, Duration.ofSeconds(15))

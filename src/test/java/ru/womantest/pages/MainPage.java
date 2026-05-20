@@ -50,14 +50,6 @@ public class MainPage extends BasePage {
         return findAll(navItems);
     }
 
-    public void clickNavItem(int index) {
-        getNavItems().get(index).click();
-    }
-
-    public String getNavItemText(int index) {
-        return getNavItems().get(index).getText().trim();
-    }
-
     public void clickNavSection(String hrefPath) {
         driver.get(BASE_URL + hrefPath);
         wait.until(ExpectedConditions.not(ExpectedConditions.urlToBe(BASE_URL + "/")));

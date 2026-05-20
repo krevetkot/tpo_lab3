@@ -84,13 +84,6 @@ public class ProfilePage extends BasePage {
         }
     }
 
-    public boolean hasTopics () {
-        String text = driver.findElement(By.xpath(
-                "/html/body/div[3]/div[4]/div/div[2]/div[2]/div[2]/div[1]/a[1]/div[1]"
-        )).getText().trim();
-        return Integer.parseInt(text) > 0;
-    }
-
     public void openProfileDirect() {
         openProfilePath("");
     }
