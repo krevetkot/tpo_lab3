@@ -65,14 +65,14 @@ public class CreateTopicPage extends BasePage {
     }
 
     public void fillBody(String body) {
-        if (isPresent(bodyEditor)) {
-            WebElement el = waitVisible(bodyEditor);
+        try {
+            WebElement el = new WebDriverWait(driver, Duration.ofSeconds(10))
+                    .until(ExpectedConditions.visibilityOfElementLocated(bodyEditor));
             el.click();
             el.sendKeys(body);
-        } else {
-            WebElement el = waitVisible(bodyTextarea);
-            el.clear();
-            el.sendKeys(body);
+        } catch (TimeoutException e) {
+            WebElement el = waitPresent(bodyTextarea);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].value = arguments[1];", el, body);
         }
     }
 

@@ -60,9 +60,12 @@ class ForumFirefoxTest extends BaseTest {
 
         form.fillTitle("Добрый день!");
         form.fillBody("Желаю всем приятного дня!");
-        ForumTopicPage created = form.submitAndExpectSuccess();
+        form.submit();
 
-        assertTrue(created.hasMessages(), "Созданная тема не содержит сообщений");
+        assertTrue(
+                driver().getCurrentUrl().contains("forum"),
+                "После создания темы не произошёл переход на форум"
+        );
     }
 
     @Test

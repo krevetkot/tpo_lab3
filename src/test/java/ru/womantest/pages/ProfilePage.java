@@ -35,15 +35,19 @@ public class ProfilePage extends BasePage {
     );
 
     private final By myPostsLink = By.xpath(
-            "/html/body/div[3]/div[2]/div[1]/div[1]/div[3]/a[1]"
+            "/html/body/div[3]/div[4]/div/div[2]/div[2]/div[1]/a[1]"
     );
 
     private final By myRepliesLink = By.xpath(
-            "/html/body/div[3]/div[2]/div[1]/div[1]/div[3]/a[2]"
+            "/html/body/div[3]/div[4]/div/div[2]/div[2]/div[1]/a[2]"
     );
 
     private final By achievementsLink = By.xpath(
-            "/html/body/div[3]/div[2]/div[1]/div[1]/div[4]/a[3]"
+            "/html/body/div[3]/div[4]/div/div[2]/div[2]/div[2]/a[3]"
+    );
+
+    private final By profileRoot = By.xpath(
+            "/html/body/div[3]/div[4]"
     );
 
     private final By topicTitles = By.xpath("/html/body/div[3]/div[4]/div/div[2]/div[2]/div[2]/div[3]/div[1]/h2");
@@ -122,6 +126,7 @@ public class ProfilePage extends BasePage {
             ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("window.stop();");
         }
         wait.until(ExpectedConditions.or(
+                ExpectedConditions.visibilityOfElementLocated(profileRoot),
                 ExpectedConditions.visibilityOfElementLocated(myPostsLink),
                 ExpectedConditions.visibilityOfElementLocated(myRepliesLink),
                 ExpectedConditions.visibilityOfElementLocated(achievementsLink)

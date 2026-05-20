@@ -14,7 +14,7 @@ public class ForumListPage extends BasePage {
     private static final String FORUM_URL = "https://www.woman.ru/forum/";
 
     private final By topicLinks = By.xpath(
-        "/html/body/div[3]/div[3]/div[1]/div[3]/div[2]/div[1]/ul/li[1]/a"
+        "/html/body/div[3]/div[3]/div[1]/div[6]/div[3]/div[1]/ul/li[1]/a"
     );
 
     private final By createTopicBtn = By.xpath(
@@ -39,7 +39,12 @@ public class ForumListPage extends BasePage {
     }
 
     public boolean hasTopics() {
-        return isPresent(topicLinks);
+        try {
+            wait.until(ExpectedConditions.presenceOfElementLocated(topicLinks));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public ForumTopicPage openFirstTopic() {
