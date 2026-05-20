@@ -13,39 +13,31 @@ import java.time.Duration;
 public class RegistrationPage extends BasePage {
 
     private final By loginBtn = By.xpath(
-        "/html/body/div[1]/div[2]/header/div[1]/div[1]/div/noindex/div/button"
+            "/html/body/div[3]/header/div/div[1]/div/div/div[2]"
     );
 
     private final By authModal = By.xpath(
-        "/html/body/div[1]/div[2]/div[1]"
+            "/html/body/div[5]"
     );
 
     private final By registrationSwitch = By.xpath(
-        "/html/body/div[1]/div[2]/div[1]/div[2]/div[2]/div[1]/div[1]/a"
+        "/html/body/div[5]/form/div/div[2]/div[5]/div[2]"
     );
 
     private final By emailInput = By.xpath(
-        "/html/body/div[1]/div[2]/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/div/input"
-    );
-
-    private final By emailRegistrationMethod = By.xpath(
-        "/html/body/div[1]/div[2]/div[1]/div[2]/div[2]/div[1]/div[2]/button[1]"
-    );
-
-    private final By passwordInput = By.xpath(
-        "/html/body/div[1]/div[2]/div[1]/div[2]/div[2]/div[1]/div[2]/div[2]/div/input"
+        "/html/body/div[5]/form/div/div[2]/div[4]/div[1]/input"
     );
 
     private final By nameInput = By.xpath(
-        "/html/body/div[1]/div[2]/div[1]/div[2]/div[2]/div[1]/div[2]/div[3]/div/input"
+        "/html/body/div[5]/form/div/div[2]/div[4]/div[2]/input"
     );
 
     private final By consentControls = By.xpath(
-        "/html/body/div[1]/div[2]/div[1]/div[2]/div[2]/div[1]/label[1]"
+        "/html/body/div[5]/form/div/div[2]/div[1]//label"
     );
 
     private final By submitBtn = By.xpath(
-        "/html/body/div[1]/div[2]/div[1]/div[2]/div[2]/div[1]/div[2]/button[1]"
+        "/html/body/div[5]/form/div/div[2]/div[6]/div[1]/button"
     );
 
     private final By cookieAgreeBtn = By.xpath(
@@ -56,6 +48,14 @@ public class RegistrationPage extends BasePage {
         "/html/body/div[1]/div[2]/div[1]/div[2]/div[2]/div[1]/div[2]/p"
     );
 
+    private final By existingEmailError = By.xpath(
+            "/html/body/div[5]/form/div/div[2]/div[4]/div[1]/div/div"
+    );
+
+    private final By existingNicknameError = By.xpath(
+            "/html/body/div[5]/form/div/div[2]/div[4]/div[2]/div/div"
+    );
+
     public RegistrationPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }
@@ -64,9 +64,7 @@ public class RegistrationPage extends BasePage {
         acceptCookies();
         openRegistrationForm();
         fillIfPresent(emailInput, email);
-        clickSubmitIfPresent();
         fillIfPresent(nameInput, nickname);
-        fillIfPresent(passwordInput, password);
         acceptPersonalDataConsents();
         clickSubmitIfPresent();
         waitForEmailConfirmationStep();
@@ -79,10 +77,9 @@ public class RegistrationPage extends BasePage {
 
     private void openRegistrationForm() {
         clickByJs(waitPresent(loginBtn));
-        waitVisible(authModal);
+        waitVisibleWithConsentRetry(authModal);
         clickFirstVisible(registrationSwitch);
-        clickFirstVisible(emailRegistrationMethod);
-        waitVisible(emailInput);
+        waitVisibleWithConsentRetry(emailInput);
     }
 
     private void clickFirstVisible(By locator) {
@@ -119,7 +116,7 @@ public class RegistrationPage extends BasePage {
     private void acceptPersonalDataConsents() {
         try {
             new WebDriverWait(driver, Duration.ofSeconds(3))
-                .until(ExpectedConditions.presenceOfElementLocated(consentControls));
+                    .until(ExpectedConditions.presenceOfElementLocated(consentControls));
             for (WebElement control : driver.findElements(consentControls)) {
                 if (control.isDisplayed() && control.isEnabled()) {
                     clickByJs(control);
@@ -141,10 +138,55 @@ public class RegistrationPage extends BasePage {
     }
 
     private void waitForEmailConfirmationStep() {
-        waitVisible(emailConfirmationMessage);
+        waitVisibleWithConsentRetry(emailConfirmationMessage);
     }
 
     private void clickByJs(WebElement element) {
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
     }
+
+    public void tryRegisterWithExistingEmail(String existingEmail, String password, String nickname) {
+        acceptCookies();
+        openRegistrationForm();
+        fillIfPresent(emailInput, existingEmail);
+        fillIfPresent(nameInput, nickname);
+        acceptPersonalDataConsents();
+        clickSubmitIfPresent();
+    }
+
+    public void tryRegisterWithExistingNickname(String email, String password, String existingNickname) {
+        acceptCookies();
+        openRegistrationForm();
+        fillIfPresent(emailInput, email);
+        fillIfPresent(nameInput, existingNickname);
+        acceptPersonalDataConsents();
+        clickSubmitIfPresent();
+    }
+
+    public boolean hasExistingEmailError() {
+        try {
+            new WebDriverWait(driver, Duration.ofSeconds(15))
+                    .until(ExpectedConditions.visibilityOfElementLocated(existingEmailError));
+            return true;
+        } catch (TimeoutException e) {
+            dismissConsentIfPresent();
+            new WebDriverWait(driver, Duration.ofSeconds(15))
+                    .until(ExpectedConditions.visibilityOfElementLocated(existingEmailError));
+            return false;
+        }
+    }
+
+    public boolean hasExistingNicknameError() {
+        try {
+            new WebDriverWait(driver, Duration.ofSeconds(15))
+                    .until(ExpectedConditions.visibilityOfElementLocated(existingNicknameError));
+            return true;
+        } catch (TimeoutException e) {
+            dismissConsentIfPresent();
+            new WebDriverWait(driver, Duration.ofSeconds(15))
+                    .until(ExpectedConditions.visibilityOfElementLocated(existingNicknameError));
+            return false;
+        }
+    }
+
 }
