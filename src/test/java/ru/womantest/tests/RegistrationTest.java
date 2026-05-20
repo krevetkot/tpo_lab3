@@ -15,9 +15,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @DisplayName("RegistrationTest — Регистрация")
 class RegistrationTest extends BaseTest {
 
-    @ParameterizedTest(name = "[{0}] TC-26: Регистрация нового пользователя")
+    @ParameterizedTest(name = "[{0}] TC-21: Регистрация нового пользователя")
     @ValueSource(strings = {"chrome", "firefox"})
-    void tc26_newUserRegistrationStopsAtEmailConfirmation(String browser) {
+    void tc21_newUserRegistrationStopsAtEmailConfirmation(String browser) {
         initDriver(browser);
         new ForumListPage(driver(), getWait()).open();
         String suffix = String.valueOf(System.currentTimeMillis());
@@ -34,9 +34,9 @@ class RegistrationTest extends BaseTest {
         );
     }
 
-    @ParameterizedTest(name = "[{0}] TC-33: Регистрация с уже существующим email показывает ошибку")
+    @ParameterizedTest(name = "[{0}] TC-28: Регистрация с уже существующим email показывает ошибку")
     @ValueSource(strings = {"chrome", "firefox"})
-    void tc33_registrationWithExistingEmailShowsError(String browser) {
+    void tc28_registrationWithExistingEmailShowsError(String browser) {
         initDriver(browser);
         ConfigReader cfg = new ConfigReader();
         Assumptions.assumeTrue(cfg.hasCredentials(),
@@ -54,9 +54,9 @@ class RegistrationTest extends BaseTest {
                 "Ошибка о существующем email не отображается");
     }
 
-    @ParameterizedTest(name = "[{0}] TC-34: Регистрация с уже существующим никнеймом показывает ошибку")
+    @ParameterizedTest(name = "[{0}] TC-29: Регистрация с уже существующим никнеймом показывает ошибку")
     @ValueSource(strings = {"chrome", "firefox"})
-    void tc34_registrationWithExistingNicknameShowsError(String browser) {
+    void tc29_registrationWithExistingNicknameShowsError(String browser) {
         initDriver(browser);
         ConfigReader cfg = new ConfigReader();
         Assumptions.assumeTrue(cfg.hasCredentials(),

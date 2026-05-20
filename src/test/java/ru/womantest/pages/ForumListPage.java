@@ -1,6 +1,7 @@
 package ru.womantest.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,9 +11,7 @@ import java.util.List;
 
 public class ForumListPage extends BasePage {
 
-    private final By forumNavLink = By.xpath(
-        "/html/body/div[1]/div[2]/header/div[2]/div[1]/div[1]/div[1]/nav/ul/li[1]/a"
-    );
+    private static final String FORUM_URL = "https://www.woman.ru/forum/";
 
     private final By topicLinks = By.xpath(
         "/html/body/div[3]/div[3]/div[1]/div[3]/div[2]/div[1]/ul/li[1]/a"
@@ -27,7 +26,7 @@ public class ForumListPage extends BasePage {
     }
 
     public ForumListPage open() {
-        waitClickable(forumNavLink).click();
+        driver.get(FORUM_URL);
         wait.until(ExpectedConditions.or(
                 ExpectedConditions.visibilityOfElementLocated(createTopicBtn),
                 ExpectedConditions.visibilityOfElementLocated(topicLinks)
@@ -55,7 +54,8 @@ public class ForumListPage extends BasePage {
     }
 
     public CreateTopicPage clickCreateTopic() {
-        waitClickable(createTopicBtn).click();
+        WebElement button = waitClickable(createTopicBtn);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", button);
         return new CreateTopicPage(driver, wait);
     }
 

@@ -47,7 +47,7 @@ class ArticleTest extends BaseTest {
         assertNotEquals(urlBefore, urlAfter, "URL не изменился после клика по тегу");
     }
 
-    @ParameterizedTest(name = "[{0}] TC-12: Под статьёй отображается блок похожих материалов")
+    @ParameterizedTest(name = "[{0}] TC-11: Под статьёй отображается блок похожих материалов")
     @ValueSource(strings = {"chrome", "firefox"})
     void tc12_articleHasRelatedLinks(String browser) {
         ArticlePage article = openArticle(browser);

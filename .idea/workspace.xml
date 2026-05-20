@@ -5,16 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0534b4e6-322c-4cfe-8930-5b7c84c0b349" name="Changes" comment="регистрация готова!">
-      <change afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/ForumChromeTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/ForumFirefoxTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/ProfileChromeTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/ProfileFirefoxTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/base/BaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/base/BaseTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/ArticlePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/ArticlePage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/CreateTopicPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/CreateTopicPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/ForumListPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/ForumListPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/ProfilePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/ProfilePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/ForumTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/pages/MainPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/ArticleTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/ArticleTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/ForumChromeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/ForumChromeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/ForumFirefoxTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/ForumFirefoxTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/LoginTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/LoginTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/ProfileChromeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/ProfileChromeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/ProfileFirefoxTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/ProfileFirefoxTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/ProfileTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/ProfileTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/RegistrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/womantest/tests/RegistrationTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,6 +101,30 @@
     </option>
   </component>
   <component name="RunManager" selected="Gradle.ForumChromeTest">
+    <configuration name="ArticleTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;ru.womantest.tests.ArticleTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <ForceTestExec>true</ForceTestExec>
+      <method v="2" />
+    </configuration>
     <configuration name="ForumChromeTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -118,7 +146,7 @@
       <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
+      <ForceTestExec>false</ForceTestExec>
       <method v="2" />
     </configuration>
     <configuration name="ForumChromeTest.tc13_forumHasTopics" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -142,7 +170,7 @@
       <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
+      <ForceTestExec>false</ForceTestExec>
       <method v="2" />
     </configuration>
     <configuration name="ForumChromeTest.tc15_authorizedUserCreatesTopic" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -166,10 +194,10 @@
       <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
+      <ForceTestExec>false</ForceTestExec>
       <method v="2" />
     </configuration>
-    <configuration name="ProfileChromeTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="NavigationTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -182,7 +210,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;ru.womantest.tests.ProfileChromeTest&quot;" />
+            <option value="&quot;ru.womantest.tests.NavigationTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -190,40 +218,16 @@
       <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="ProfileChromeTest.tc35_profileAllTabIsNotEmpty" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;ru.womantest.tests.ProfileChromeTest.tc35_profileAllTabIsNotEmpty&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
+      <ForceTestExec>true</ForceTestExec>
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.ForumChromeTest" />
+        <item itemvalue="Gradle.NavigationTest" />
+        <item itemvalue="Gradle.ArticleTest" />
         <item itemvalue="Gradle.ForumChromeTest.tc15_authorizedUserCreatesTopic" />
         <item itemvalue="Gradle.ForumChromeTest.tc13_forumHasTopics" />
-        <item itemvalue="Gradle.ProfileChromeTest" />
-        <item itemvalue="Gradle.ProfileChromeTest.tc35_profileAllTabIsNotEmpty" />
       </list>
     </recent_temporary>
   </component>
@@ -320,6 +324,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit" />

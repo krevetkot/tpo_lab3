@@ -30,8 +30,8 @@ class ForumFirefoxTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("TC-13 [firefox]: Форум загружается и содержит список тем")
-    void tc13_forumHasTopics() {
+    @DisplayName("TC-12 [firefox]: Форум загружается и содержит список тем")
+    void tc12_forumHasTopics() {
         ForumListPage forum = new ForumListPage(driver(), getWait()).open();
 
         assertTrue(forum.hasTopics(), "Форум не содержит ни одной темы");
@@ -39,8 +39,8 @@ class ForumFirefoxTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("TC-14 [firefox]: Открытие темы показывает список сообщений")
-    void tc14_topicHasMessages() {
+    @DisplayName("TC-13 [firefox]: Открытие темы показывает список сообщений")
+    void tc13_topicHasMessages() {
         ForumListPage forum = new ForumListPage(driver(), getWait()).open();
         Assumptions.assumeTrue(forum.hasTopics(), "Нет тем — тест пропущен");
 
@@ -50,8 +50,8 @@ class ForumFirefoxTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("TC-15 [firefox]: Авторизованный пользователь создаёт тему")
-    void tc15_authorizedUserCreatesTopic() {
+    @DisplayName("TC-14 [firefox]: Авторизованный пользователь создаёт тему")
+    void tc14_authorizedUserCreatesTopic() {
         ForumListPage forum = new ForumListPage(driver(), getWait()).open();
         Assumptions.assumeTrue(forum.hasCreateTopicButton(), "Кнопка создания темы не найдена.");
 
@@ -66,8 +66,8 @@ class ForumFirefoxTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("TC-16 [firefox]: Авторизованный пользователь размещает ответ в теме")
-    void tc16_authorizedUserPostsReply() {
+    @DisplayName("TC-15 [firefox]: Авторизованный пользователь размещает ответ в теме")
+    void tc15_authorizedUserPostsReply() {
         ForumListPage forum = new ForumListPage(driver(), getWait()).open();
         Assumptions.assumeTrue(forum.hasTopics(), "Нет тем — тест пропущен");
 
@@ -82,8 +82,8 @@ class ForumFirefoxTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("TC-17 [firefox]: Создание темы без заголовка показывает ошибку")
-    void tc17_createTopicWithoutTitleShowsError() {
+    @DisplayName("TC-16 [firefox]: Создание темы без заголовка показывает ошибку")
+    void tc16_createTopicWithoutTitleShowsError() {
         ForumListPage forum = new ForumListPage(driver(), getWait()).open();
         Assumptions.assumeTrue(forum.hasCreateTopicButton(), "Кнопка создания темы не найдена.");
 
@@ -98,8 +98,8 @@ class ForumFirefoxTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("TC-25 [firefox]: Созданная тема появляется в профиле с плашкой «на модерации»")
-    void tc25_createdTopicAppearsInProfileWithModerationBadge() {
+    @DisplayName("TC-17 [firefox]: Созданная тема появляется в профиле с плашкой «на модерации»")
+    void tc17_createdTopicAppearsInProfileWithModerationBadge() {
         String uniqueTitle = "Всем привет!";
 
         ForumListPage forum = new ForumListPage(driver(), getWait()).open();

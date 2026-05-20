@@ -35,7 +35,7 @@ public class MainPage extends BasePage {
     );
 
     private final By firstArticleLink = By.xpath(
-        "/html/body/div[1]/div[2]/main/div/div/div[1]/div[1]/div[1]/div[2]/span/a"
+        "/html/body/div[1]/div[2]/main/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/a[1]"
     );
 
     public MainPage(WebDriver driver, WebDriverWait wait) {

@@ -11,9 +11,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @DisplayName("ProfileTest — Личный кабинет")
 class ProfileTest extends BaseTest {
 
-    @ParameterizedTest(name = "[{0}] TC-21: Раздел «Достижения» открывается")
+    @ParameterizedTest(name = "[{0}] TC-18: Раздел «Достижения» открывается")
     @ValueSource(strings = {"chrome", "firefox"})
-    void tc21_favoriteAppearsInFavoritesSection(String browser) {
+    void tc18_favoriteAppearsInFavoritesSection(String browser) {
         initDriverAndLogin(browser);
         ProfilePage profile = new ProfilePage(driver(), getWait());
         profile.openProfileDirect();
@@ -22,9 +22,9 @@ class ProfileTest extends BaseTest {
         assertTrue(profile.getCurrentUrl().contains("achievements"));
     }
 
-    @ParameterizedTest(name = "[{0}] TC-22: Раздел «Темы» содержит посты пользователя")
+    @ParameterizedTest(name = "[{0}] TC-19: Раздел «Темы» содержит посты пользователя")
     @ValueSource(strings = {"chrome", "firefox"})
-    void tc22_myPostsHasContent(String browser) {
+    void tc19_myPostsHasContent(String browser) {
         initDriverAndLogin(browser);
         ProfilePage profile = new ProfilePage(driver(), getWait());
         profile.openProfileDirect();
@@ -33,9 +33,9 @@ class ProfileTest extends BaseTest {
         assertTrue(profile.getCurrentUrl().contains("threads"));
     }
 
-    @ParameterizedTest(name = "[{0}] TC-23: Раздел «Ответы» содержит ответы пользователя")
+    @ParameterizedTest(name = "[{0}] TC-20: Раздел «Ответы» содержит ответы пользователя")
     @ValueSource(strings = {"chrome", "firefox"})
-    void tc23_myRepliesHasContent(String browser) {
+    void tc20_myRepliesHasContent(String browser) {
         initDriverAndLogin(browser);
         ProfilePage profile = new ProfilePage(driver(), getWait());
         profile.openProfileDirect();

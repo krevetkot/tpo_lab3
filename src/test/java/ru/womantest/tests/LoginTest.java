@@ -15,9 +15,9 @@ import static org.junit.jupiter.api.Assertions.*;
 @DisplayName("LoginTest — Авторизация")
 class LoginTest extends BaseTest {
 
-    @ParameterizedTest(name = "[{0}] TC-27: Успешная авторизация на главной")
+    @ParameterizedTest(name = "[{0}] TC-22: Успешная авторизация на главной")
     @ValueSource(strings = {"chrome", "firefox"})
-    void tc27_successfulLoginOnMainSite(String browser) {
+    void tc22_successfulLoginOnMainSite(String browser) {
         initDriver(browser);
         ConfigReader cfg = new ConfigReader();
         Assumptions.assumeTrue(cfg.hasCredentials(),
@@ -30,9 +30,9 @@ class LoginTest extends BaseTest {
                 "Пользователь не авторизовался на главной: аватар не появился после входа");
     }
 
-    @ParameterizedTest(name = "[{0}] TC-28: Неверный пароль на главной показывает ошибку")
+    @ParameterizedTest(name = "[{0}] TC-23: Неверный пароль на главной показывает ошибку")
     @ValueSource(strings = {"chrome", "firefox"})
-    void tc28_wrongPasswordOnMainSiteShowsError(String browser) {
+    void tc23_wrongPasswordOnMainSiteShowsError(String browser) {
         initDriver(browser);
         ConfigReader cfg = new ConfigReader();
         Assumptions.assumeTrue(cfg.hasCredentials(),
@@ -47,9 +47,9 @@ class LoginTest extends BaseTest {
                 "Ошибка авторизации не отображается на главной при неверном пароле");
     }
 
-    @ParameterizedTest(name = "[{0}] TC-29: Несуществующий email на главной показывает ошибку")
+    @ParameterizedTest(name = "[{0}] TC-24: Несуществующий email на главной показывает ошибку")
     @ValueSource(strings = {"chrome", "firefox"})
-    void tc29_unknownEmailOnMainSiteShowsError(String browser) {
+    void tc24_unknownEmailOnMainSiteShowsError(String browser) {
         initDriver(browser);
 
         LoginPage loginPage = new LoginPage(driver(), getWait());
@@ -64,9 +64,9 @@ class LoginTest extends BaseTest {
                 "Ошибка авторизации не отображается на главной при несуществующем email");
     }
 
-    @ParameterizedTest(name = "[{0}] TC-30: Успешная авторизация на форуме")
+    @ParameterizedTest(name = "[{0}] TC-25: Успешная авторизация на форуме")
     @ValueSource(strings = {"chrome", "firefox"})
-    void tc30_successfulLoginOnForum(String browser) {
+    void tc25_successfulLoginOnForum(String browser) {
         initDriver(browser);
         ConfigReader cfg = new ConfigReader();
         Assumptions.assumeTrue(cfg.hasCredentials(),
@@ -81,9 +81,9 @@ class LoginTest extends BaseTest {
                 "Пользователь не авторизовался на форуме: кнопка «Войти» не исчезла");
     }
 
-    @ParameterizedTest(name = "[{0}] TC-31: Неверный пароль на форуме показывает ошибку")
+    @ParameterizedTest(name = "[{0}] TC-26: Неверный пароль на форуме показывает ошибку")
     @ValueSource(strings = {"chrome", "firefox"})
-    void tc31_wrongPasswordOnForumShowsError(String browser) {
+    void tc26_wrongPasswordOnForumShowsError(String browser) {
         initDriver(browser);
         ConfigReader cfg = new ConfigReader();
         Assumptions.assumeTrue(cfg.hasCredentials(),
@@ -100,9 +100,9 @@ class LoginTest extends BaseTest {
                 "Ошибка авторизации на форуме не отображается при неверном пароле");
     }
 
-    @ParameterizedTest(name = "[{0}] TC-32: Несуществующий email на форуме показывает ошибку")
+    @ParameterizedTest(name = "[{0}] TC-27: Несуществующий email на форуме показывает ошибку")
     @ValueSource(strings = {"chrome", "firefox"})
-    void tc32_unknownEmailOnForumShowsError(String browser) {
+    void tc27_unknownEmailOnForumShowsError(String browser) {
         initDriver(browser);
 
         new ForumListPage(driver(), getWait()).open();

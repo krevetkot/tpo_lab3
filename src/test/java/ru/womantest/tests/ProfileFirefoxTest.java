@@ -29,8 +29,8 @@ class ProfileFirefoxTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("TC-35 [firefox]: Вкладка «Все» в профиле непуста")
-    void tc35_profileAllTabIsNotEmpty() {
+    @DisplayName("TC-30 [firefox]: Вкладка «Все» в профиле непуста")
+    void tc30_profileAllTabIsNotEmpty() {
         ProfilePage profile = new ProfilePage(driver(), getWait());
         profile.goToAllTab();
 
@@ -38,8 +38,8 @@ class ProfileFirefoxTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("TC-36 [firefox]: Вкладка «Темы» в профиле непуста")
-    void tc36_profileTopicsTabIsNotEmpty() {
+    @DisplayName("TC-31 [firefox]: Вкладка «Темы» в профиле непуста")
+    void tc31_profileTopicsTabIsNotEmpty() {
         ProfilePage profile = new ProfilePage(driver(), getWait());
         profile.goToTopicsTab();
 
@@ -47,8 +47,8 @@ class ProfileFirefoxTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("TC-37 [firefox]: Вкладка «Избранное» в профиле непуста")
-    void tc37_profileFavoritesTabIsNotEmpty() {
+    @DisplayName("TC-32 [firefox]: Вкладка «Избранное» в профиле непуста")
+    void tc32_profileFavoritesTabIsNotEmpty() {
         ProfilePage profile = new ProfilePage(driver(), getWait());
         profile.goToFavoritesTab();
 

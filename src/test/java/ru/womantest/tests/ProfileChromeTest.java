@@ -29,8 +29,8 @@ class ProfileChromeTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("TC-35 [chrome]: Вкладка «Все» в профиле непуста")
-    void tc35_profileAllTabIsNotEmpty() {
+    @DisplayName("TC-30 [chrome]: Вкладка «Все» в профиле непуста")
+    void tc30_profileAllTabIsNotEmpty() {
         ProfilePage profile = new ProfilePage(driver(), getWait());
         profile.goToAllTab();
 
@@ -38,8 +38,8 @@ class ProfileChromeTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("TC-36 [chrome]: Вкладка «Темы» в профиле непуста")
-    void tc36_profileTopicsTabIsNotEmpty() {
+    @DisplayName("TC-31 [chrome]: Вкладка «Темы» в профиле непуста")
+    void tc31_profileTopicsTabIsNotEmpty() {
         ProfilePage profile = new ProfilePage(driver(), getWait());
         profile.goToTopicsTab();
 
@@ -47,8 +47,8 @@ class ProfileChromeTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("TC-37 [chrome]: Вкладка «Избранное» в профиле непуста")
-    void tc37_profileFavoritesTabIsNotEmpty() {
+    @DisplayName("TC-32 [chrome]: Вкладка «Избранное» в профиле непуста")
+    void tc32_profileFavoritesTabIsNotEmpty() {
         ProfilePage profile = new ProfilePage(driver(), getWait());
         profile.goToFavoritesTab();
 

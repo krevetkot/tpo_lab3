@@ -10,9 +10,9 @@ import java.util.List;
 
 public class ArticlePage extends BasePage {
 
-    private final By title = By.xpath("/html/body/div[1]/div[2]/main/div/div/div[1]/div/div/article/div/div/header/div/h1");
+    private final By title = By.xpath("/html/body/div[1]/div[2]/main/div[1]/div[1]/div[1]/div[2]/div[1]/article[1]/div[1]/div[2]/header[1]/div[1]/h1[1]");
 
-    private final By body = By.xpath("/html/body/div[1]/div[2]/main/div/div/div[1]/div/div/article/div/div/section/div[1]/div[2]/div/div/p");
+    private final By body = By.xpath("/html/body/div[1]/div[2]/main/div[1]/div[1]/div[1]/div[2]/div[1]/article[1]/div[1]/div[2]/section[1]");
 
     private final By commentsSection = By.xpath(
         "/html/body/div[1]/div[2]/main/div/div/div[1]/div/div/article/div/div/header/div/div[2]/div/span[2]"
@@ -27,7 +27,7 @@ public class ArticlePage extends BasePage {
     );
 
     private final By relatedLinks = By.xpath(
-        "/html/body/div[1]/div[2]/main/div/div/div[1]/div/div/aside/div/div/div/div[2]/div/div[2]/div/div[1]/a"
+        "/html/body/div[1]/div[2]/main/div[1]/div[1]/div[1]/div[2]/div[1]/aside[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/a[1]"
     );
 
     private final By favoriteBtn = By.xpath(

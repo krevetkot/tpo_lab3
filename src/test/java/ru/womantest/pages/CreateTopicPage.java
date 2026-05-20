@@ -13,19 +13,23 @@ import java.time.Duration;
 public class CreateTopicPage extends BasePage {
 
     private final By titleInput = By.xpath(
-            "/html/body/div[3]/div[2]/div[1]/form/div[1]/input"
+            "/html/body/div[5]/form[1]/div/div[2]/div[5]/input"
     );
 
     private final By bodyTextarea = By.xpath(
-            "/html/body/div[3]/div[2]/div[1]/form/div[2]/textarea"
+            "/html/body/div[5]/form[1]/div/div[2]/textarea"
     );
 
     private final By submitBtn = By.xpath(
-            "/html/body/div[3]/div[2]/div[1]/form/div[3]/button"
+            "/html/body/div[5]/form[1]/div/div[2]/div[10]/div[1]/button"
     );
 
     private final By validationError = By.xpath(
-            "/html/body/div[3]/div[2]/div[1]/form/div[1]/div"
+            "/html/body/div[5]/form[1]/div/div[2]/div[5]/div/div[1]"
+    );
+
+    private final By bodyEditor = By.xpath(
+            "/html/body/div[5]/form[1]/div/div[2]/div[2]/div[1]"
     );
 
     private final By firstModalBtn = By.xpath(
@@ -41,7 +45,17 @@ public class CreateTopicPage extends BasePage {
     }
 
     public boolean isFormLoaded() {
-        return isPresent(titleInput) || isPresent(bodyTextarea);
+        try {
+            new WebDriverWait(driver, Duration.ofSeconds(10))
+                    .until(ExpectedConditions.or(
+                            ExpectedConditions.presenceOfElementLocated(titleInput),
+                            ExpectedConditions.presenceOfElementLocated(bodyEditor),
+                            ExpectedConditions.presenceOfElementLocated(bodyTextarea)
+                    ));
+            return true;
+        } catch (TimeoutException e) {
+            return false;
+        }
     }
 
     public void fillTitle(String title) {
@@ -51,11 +65,10 @@ public class CreateTopicPage extends BasePage {
     }
 
     public void fillBody(String body) {
-        By contentEditable = By.xpath("/html/body/div[3]/div[2]/div[1]/form/div[2]/div");
-        if (isPresent(contentEditable)) {
-            WebElement el = waitVisible(contentEditable);
+        if (isPresent(bodyEditor)) {
+            WebElement el = waitVisible(bodyEditor);
             el.click();
-            ((JavascriptExecutor) driver).executeScript("arguments[0].innerHTML = arguments[1]", el, body);
+            el.sendKeys(body);
         } else {
             WebElement el = waitVisible(bodyTextarea);
             el.clear();
