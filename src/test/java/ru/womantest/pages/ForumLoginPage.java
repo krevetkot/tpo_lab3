@@ -10,51 +10,46 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class LoginPage extends BasePage {
+public class ForumLoginPage extends BasePage {
 
-    private final By loginBtn = By.xpath(
-            "/html/body/div[1]/div[2]/header/div[1]/div[1]/div/noindex/div/button"
+    private final By signInBtn = By.xpath(
+            "/html/body/div[3]/header/div/div[1]/div/div/div[2]"
+    );
+
+    private final By forumModal = By.xpath(
+            "/html/body/div[5]/form/div/div[2]"
     );
 
     private final By emailInput = By.xpath(
-            "/html/body/div[1]/div[2]/div[1]/div[2]/div[2]/div[1]/div[4]/div[2]/div/input"
+            "/html/body/div[5]/form/div/div[2]/div[4]/div[1]/input"
     );
 
     private final By passwordInput = By.xpath(
-            "/html/body/div[1]/div[2]/div[1]/div[2]/div[2]/div[1]/div[4]/div[3]/div/input"
+            "/html/body/div[5]/form/div/div[2]/div[4]/div[2]/input"
     );
 
     private final By consentControls = By.xpath(
-            "/html/body/div[1]/div[2]/div[1]/div[2]/div[2]/div[1]/label[1]"
+            "//html/body/div[5]/form/div/div[2]/div[1]/div/label"
     );
 
     private final By submitBtn = By.xpath(
-            "/html/body/div[1]/div[2]/div[1]/div[2]/div[2]/div[1]/div[4]/button"
+            "/html/body/div[5]/form/div/div[2]/div[5]/div[1]/button"
     );
 
-    private final By userAvatar = By.xpath(
-            "/html/body/div[1]/div[2]/header/div[1]/div[1]/div/noindex/div"
-    );
-
-    private final By authModal = By.xpath(
-            "/html/body/div[1]/div[2]/div[1]"
-    );
-
-    private final By cookieAgreeBtn = By.xpath(
-            "/html/body/div[1]/div[2]/div[3]/button"
+    private final By anonymousBlock = By.xpath(
+            "/html/body/div[3]/header/div/div[1]/div/div/div[1]/div[2]/div[2]"
     );
 
     private final By loginError = By.xpath(
-            "/html/body/div[1]/div[2]/div[1]/div[2]/div[1]/div[2]/div[4]"
+            "/html/body/div[5]/form/div/div[2]/div[4]/div[2]/div/div"
     );
 
-    public LoginPage(WebDriver driver, WebDriverWait wait) {
+    public ForumLoginPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }
 
     public void login(String email, String password) {
-        acceptCookies();
-        clickByJs(waitPresent(loginBtn));
+        clickByJs(waitPresent(signInBtn));
         waitVisible(emailInput).sendKeys(email);
         waitPasswordInput().sendKeys(password);
         acceptPersonalDataConsents();
@@ -63,8 +58,7 @@ public class LoginPage extends BasePage {
     }
 
     public void loginAndWaitForResult(String email, String password) {
-        acceptCookies();
-        clickByJs(waitPresent(loginBtn));
+        clickByJs(waitPresent(signInBtn));
         waitVisible(emailInput).sendKeys(email);
         waitPasswordInput().sendKeys(password);
         acceptPersonalDataConsents();
@@ -73,7 +67,7 @@ public class LoginPage extends BasePage {
     }
 
     public boolean isLoggedIn() {
-        return isPresent(userAvatar);
+        return !isPresent(anonymousBlock);
     }
 
     public boolean hasLoginError() {
@@ -82,25 +76,16 @@ public class LoginPage extends BasePage {
                     .until(d -> {
                         boolean errorVisible = d.findElements(loginError).stream()
                                 .anyMatch(WebElement::isDisplayed);
-                        boolean modalStillOpen = !d.findElements(authModal).isEmpty()
-                                && d.findElement(authModal).isDisplayed();
-                        return errorVisible || (modalStillOpen && !isPresent(userAvatar));
+                        boolean modalStillOpen = !d.findElements(forumModal).isEmpty()
+                                && d.findElement(forumModal).isDisplayed();
+                        return errorVisible || (modalStillOpen);
                     });
-            boolean modalOpen = isPresent(authModal)
-                    && driver.findElement(authModal).isDisplayed();
+            boolean modalOpen = isPresent(forumModal)
+                    && driver.findElement(forumModal).isDisplayed();
             return modalOpen && !isLoggedIn();
         } catch (TimeoutException e) {
             return false;
         }
-    }
-
-    public String getLoginErrorText() {
-        return driver.findElements(loginError).stream()
-                .filter(WebElement::isDisplayed)
-                .map(WebElement::getText)
-                .filter(t -> !t.isBlank())
-                .findFirst()
-                .orElse("");
     }
 
     private WebElement waitPasswordInput() {
@@ -123,30 +108,23 @@ public class LoginPage extends BasePage {
                     clickByJs(control);
                 }
             }
+//            new WebDriverWait(driver, Duration.ofSeconds(3))
+//                    .until(ExpectedConditions.presenceOfElementLocated(consentControls2));
+//            for (WebElement control : driver.findElements(consentControls2)) {
+//                if (control.isDisplayed() && control.isEnabled()) {
+//                    clickByJs(control);
+//                }
+//            }
         } catch (TimeoutException ignored) {
         }
-    }
-
-    private void acceptCookies() {
-        try {
-            WebElement button = new WebDriverWait(driver, Duration.ofSeconds(3))
-                    .until(ExpectedConditions.presenceOfElementLocated(cookieAgreeBtn));
-            if (button.isDisplayed() && button.isEnabled()) {
-                clickByJs(button);
-            }
-        } catch (TimeoutException ignored) {
-        }
-    }
-
-    private void clickByJs(WebElement element) {
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
     }
 
     private void waitLoginFinished() {
         try {
-            waitVisible(userAvatar);
+            new WebDriverWait(driver, Duration.ofSeconds(15))
+                    .until(d -> !isPresent(anonymousBlock));
         } catch (TimeoutException ignored) {
-            wait.until(ExpectedConditions.invisibilityOfElementLocated(authModal));
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(forumModal));
         }
     }
 
@@ -154,10 +132,14 @@ public class LoginPage extends BasePage {
         try {
             new WebDriverWait(driver, Duration.ofSeconds(10))
                     .until(d ->
-                            !d.findElements(userAvatar).isEmpty()
-                                    || d.findElements(loginError).stream().anyMatch(WebElement::isDisplayed)
+                            !isPresent(anonymousBlock)
+                                    || (isPresent(forumModal) && driver.findElement(forumModal).isDisplayed())
                     );
         } catch (TimeoutException ignored) {
         }
+    }
+
+    private void clickByJs(WebElement element) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
     }
 }
