@@ -3,12 +3,15 @@ package ru.womantest.tests;
 import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import ru.womantest.base.BaseTest;
 import ru.womantest.pages.ForumListPage;
 import ru.womantest.pages.ForumLoginPage;
 import ru.womantest.pages.LoginPage;
 import ru.womantest.util.ConfigReader;
+
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 

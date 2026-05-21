@@ -159,7 +159,7 @@ public class RegistrationPage extends BasePage {
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
     }
 
-    public void tryRegisterWithExistingEmail(String existingEmail, String password, String nickname) {
+    public void tryRegisterWithExistingEmail(String existingEmail, String nickname) {
         acceptCookies();
         openRegistrationForm();
         fillIfPresent(emailInput, existingEmail);
@@ -168,7 +168,7 @@ public class RegistrationPage extends BasePage {
         clickSubmitIfPresent();
     }
 
-    public void tryRegisterWithExistingNickname(String email, String password, String existingNickname) {
+    public void tryRegisterWithExistingNickname(String email, String existingNickname) {
         acceptCookies();
         openRegistrationForm();
         fillIfPresent(emailInput, email);
