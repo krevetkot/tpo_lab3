@@ -10,24 +10,19 @@ import java.util.List;
 public class ForumTopicPage extends BasePage {
 
     private final By messages = By.xpath(
-        "//div[contains(@class,'message') or contains(@class,'post') or contains(@class,'reply')]"
-        + "[not(contains(@class,'form') or contains(@class,'input'))]"
+        "/html/body/div[3]/div[4]/div[1]/div[2]"
     );
 
     private final By replyTextarea = By.xpath(
-        "//textarea[contains(@class,'reply') or contains(@class,'message')"
-        + " or contains(@placeholder,'сообщение') or contains(@placeholder,'ответ')]"
-        + " | //div[@contenteditable='true'][contains(@class,'editor')]"
+        "/html/body/div[3]/div[2]/div[1]/div[1]/form/div[2]/textarea"
     );
 
     private final By submitReplyBtn = By.xpath(
-        "//button[contains(text(),'Отправить') or contains(text(),'Ответить')"
-        + " or contains(@class,'submit') or contains(@class,'send')][@type='submit']"
+        "/html/body/div[3]/div[2]/div[1]/div[1]/form/div[3]/button"
     );
 
     private final By firstAuthorName = By.xpath(
-        "(//div[contains(@class,'author') or contains(@class,'user-name')"
-        + " or contains(@class,'username')])[1]"
+        "/html/body/div[3]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]"
     );
 
     public ForumTopicPage(WebDriver driver, WebDriverWait wait) {
@@ -59,10 +54,6 @@ public class ForumTopicPage extends BasePage {
     public void postReply(String text) {
         typeReply(text);
         submitReply();
-    }
-
-    public String getFirstAuthorName() {
-        return waitVisible(firstAuthorName).getText().trim();
     }
 
     public int getMessageCount() {

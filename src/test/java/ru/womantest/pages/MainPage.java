@@ -19,29 +19,23 @@ public class MainPage extends BasePage {
     private static final String BASE_URL = "https://www.woman.ru";
 
     private final By logo = By.xpath(
-        "//a[contains(@class,'logo')] | //header//img[contains(@alt,'woman') or contains(@alt,'Woman')]"
+        "/html/body/div[1]/div[2]/header/div[1]/span"
     );
 
     private final By navItems = By.xpath(
-        "//nav//a[not(contains(@class,'logo'))]"
-        + " | //ul[contains(@class,'menu') or contains(@class,'nav')]//a"
-        + " | //header//a[contains(@href,'/beauty/') or contains(@href,'/health/') or contains(@href,'/relations/')]"
+        "/html/body/div[1]/div[2]/header/div[2]/div[1]/div[1]/div[1]/nav/ul/li[1]/a"
     );
 
     private final By searchToggle = By.xpath(
-        "//button[contains(@class,'search') or @aria-label='Поиск']"
-        + " | //a[contains(@class,'search') or @aria-label='Поиск']"
+        "/html/body/div[1]/div[2]/header/div[1]/div[1]/div/button"
     );
 
     private final By searchInput = By.xpath(
-        "//input[@type='search' or @name='q'"
-        + " or contains(@placeholder,'поиск') or contains(@placeholder,'Поиск')"
-        + " or contains(@placeholder,'ищите') or contains(@placeholder,'Ищите')]"
+        "/html/body/div[1]/div[2]/div[2]/div/div/div/input"
     );
 
     private final By firstArticleLink = By.xpath(
-        "(//article//a[@href] | //div[contains(@class,'article')]//a[@href]"
-        + " | //div[contains(@class,'item')]//a[@href])[1]"
+        "/html/body/div[1]/div[2]/main/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/a[1]"
     );
 
     public MainPage(WebDriver driver, WebDriverWait wait) {
@@ -56,27 +50,8 @@ public class MainPage extends BasePage {
         return findAll(navItems);
     }
 
-    public void clickNavItem(int index) {
-        getNavItems().get(index).click();
-    }
-
-    public String getNavItemText(int index) {
-        return getNavItems().get(index).getText().trim();
-    }
-
     public void clickNavSection(String hrefPath) {
-        By byHref = By.xpath(
-            "//a[contains(@class,'header__nav-link') and contains(@href,'" + hrefPath + "')]"
-            + " | //nav//a[contains(@href,'" + hrefPath + "') and not(contains(@href,'.svg'))]"
-            + " | //header//a[contains(@href,'" + hrefPath + "') and not(contains(@href,'.svg')) and not(contains(@href,'#'))]"
-        );
-        WebElement link = waitPresent(byHref);
-        String href = link.getAttribute("href");
-        if (href != null && !href.isBlank()) {
-            driver.get(href);
-        } else {
-            link.click();
-        }
+        driver.get(BASE_URL + hrefPath);
         wait.until(ExpectedConditions.not(ExpectedConditions.urlToBe(BASE_URL + "/")));
     }
 
@@ -113,8 +88,13 @@ public class MainPage extends BasePage {
 
     public ArticlePage openFirstArticle() {
         WebElement link = waitPresent(firstArticleLink);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", link);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", link);
+        String href = link.getAttribute("href");
+        if (href != null && !href.isBlank()) {
+            driver.get(href);
+        } else {
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", link);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", link);
+        }
         return new ArticlePage(driver, wait);
     }
 }

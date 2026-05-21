@@ -1,29 +1,24 @@
 package ru.womantest.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
 public class ForumListPage extends BasePage {
 
-    private final By forumNavLink = By.xpath(
-        "//a[contains(@href,'forum') or contains(@href,'community')"
-        + " or normalize-space()='Форум' or normalize-space()='Форумы']"
-    );
+    private static final String FORUM_URL = "https://www.woman.ru/forum/";
 
     private final By topicLinks = By.xpath(
-        "//div[contains(@class,'forum') or contains(@class,'topic')"
-        + " or contains(@class,'thread')]//a[@href]"
-        + " | //ul[contains(@class,'forum')]//a[@href]"
+        "/html/body/div[3]/div[3]/div[1]/div[6]/div[3]/div[1]/ul/li[1]/a"
     );
 
     private final By createTopicBtn = By.xpath(
-        "//a[contains(text(),'Создать тему') or contains(text(),'Новая тема')"
-        + " or contains(@class,'create') or contains(@class,'new-topic')]"
-        + " | //button[contains(text(),'Создать') or contains(text(),'Новая тема')]"
+        "/html/body/div[3]/div[3]/div[1]/div[1]/div/div[2]/div[2]/div[2]/button"
     );
 
     public ForumListPage(WebDriver driver, WebDriverWait wait) {
@@ -31,7 +26,11 @@ public class ForumListPage extends BasePage {
     }
 
     public ForumListPage open() {
-        waitClickable(forumNavLink).click();
+        driver.get(FORUM_URL);
+        wait.until(ExpectedConditions.or(
+                ExpectedConditions.visibilityOfElementLocated(createTopicBtn),
+                ExpectedConditions.visibilityOfElementLocated(topicLinks)
+        ));
         return this;
     }
 
@@ -40,16 +39,28 @@ public class ForumListPage extends BasePage {
     }
 
     public boolean hasTopics() {
-        return isPresent(topicLinks);
+        try {
+            wait.until(ExpectedConditions.presenceOfElementLocated(topicLinks));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public ForumTopicPage openFirstTopic() {
-        waitClickable(topicLinks).click();
+        WebElement link = waitClickable(topicLinks);
+        String href = link.getAttribute("href");
+        if (href != null && !href.isBlank()) {
+            driver.get(href);
+        } else {
+            link.click();
+        }
         return new ForumTopicPage(driver, wait);
     }
 
     public CreateTopicPage clickCreateTopic() {
-        waitClickable(createTopicBtn).click();
+        WebElement button = waitClickable(createTopicBtn);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", button);
         return new CreateTopicPage(driver, wait);
     }
 

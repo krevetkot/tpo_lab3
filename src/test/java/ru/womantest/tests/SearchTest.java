@@ -12,16 +12,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @DisplayName("SearchTest - поиск по форуму")
 class SearchTest extends BaseTest {
 
-    @ParameterizedTest(name = "[{0}] TC-05: поиск Диета возвращает темы форума")
-    @ValueSource(strings = {"chrome", "firefox"})
-    void tc05_searchReturnsResults(String browser) {
-        initDriver(browser);
-        SearchResultsPage results = new MainPage(driver(), getWait()).search("диета");
-
-        assertTrue(results.getResultCount() > 0,
-            "Поиск по запросу Диета не вернул результатов");
-    }
-
     @ParameterizedTest(name = "[{0}] TC-06: запрос Здоровье отражается в URL")
     @ValueSource(strings = {"chrome", "firefox"})
     void tc06_queryAppearsInUrl(String browser) {

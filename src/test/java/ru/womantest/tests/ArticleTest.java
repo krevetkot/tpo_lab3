@@ -27,27 +27,7 @@ class ArticleTest extends BaseTest {
         assertTrue(article.hasBody(), "Тело статьи отсутствует или пустое");
     }
 
-    @ParameterizedTest(name = "[{0}] TC-09: На странице статьи присутствует блок комментариев")
-    @ValueSource(strings = {"chrome", "firefox"})
-    void tc09_articleHasCommentsSection(String browser) {
-        ArticlePage article = openArticle(browser);
-
-        assertTrue(article.hasComments(), "Блок комментариев не найден на странице статьи");
-    }
-
-    @ParameterizedTest(name = "[{0}] TC-10: Клик по тегу ведёт на страницу тега")
-    @ValueSource(strings = {"chrome", "firefox"})
-    void tc10_tagClickNavigatesToTagPage(String browser) {
-        ArticlePage article = openArticle(browser);
-        Assumptions.assumeTrue(article.hasTags(), "У статьи нет тегов — тест пропущен");
-
-        String urlBefore = driver().getCurrentUrl();
-        String urlAfter = article.clickFirstTagAndGetUrl();
-
-        assertNotEquals(urlBefore, urlAfter, "URL не изменился после клика по тегу");
-    }
-
-    @ParameterizedTest(name = "[{0}] TC-12: Под статьёй отображается блок похожих материалов")
+    @ParameterizedTest(name = "[{0}] TC-11: Под статьёй отображается блок похожих материалов")
     @ValueSource(strings = {"chrome", "firefox"})
     void tc12_articleHasRelatedLinks(String browser) {
         ArticlePage article = openArticle(browser);

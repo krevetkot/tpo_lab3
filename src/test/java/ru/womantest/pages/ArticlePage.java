@@ -10,38 +10,20 @@ import java.util.List;
 
 public class ArticlePage extends BasePage {
 
-    private final By title = By.xpath("//h1");
+    private final By title = By.xpath("/html/body/div[1]/div[2]/main/div[1]/div[1]/div[1]/div[2]/div[1]/article[1]/div[1]/div[2]/header[1]/div[1]/h1[1]");
 
-    private final By body = By.xpath(
-        "//div[contains(@class,'article-body') or contains(@class,'article__body')"
-        + " or contains(@class,'content') or contains(@class,'text')]//p[1]"
-    );
-
-    private final By commentsSection = By.xpath(
-        "//div[contains(@class,'comment') or contains(@id,'comment')]"
-        + " | //section[contains(@class,'comment')]"
-    );
-
-    private final By tags = By.xpath(
-        "//a[contains(@class,'tag') or contains(@class,'label')]"
-        + "[ancestor::div[contains(@class,'tag') or contains(@class,'label') or contains(@class,'topic')]]"
-    );
+    private final By body = By.xpath("/html/body/div[1]/div[2]/main/div[1]/div[1]/div[1]/div[2]/div[1]/article[1]/div[1]/div[2]/section[1]");
 
     private final By breadcrumbs = By.xpath(
-        "//nav[contains(@aria-label,'breadcrumb') or contains(@class,'breadcrumb')]//a"
-        + " | //ol[contains(@class,'breadcrumb')]//a"
-        + " | //div[contains(@class,'breadcrumb')]//a"
+        "/html/body/div[1]/div[2]/main/div/div/div[1]/div/div/article/div/div/nav/a[1]"
     );
 
     private final By relatedLinks = By.xpath(
-        "//a[contains(@class,'announce-inline-tile')][@href]"
+        "/html/body/div[1]/div[2]/main/div[1]/div[1]/div[1]/div[2]/div[1]/aside[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/a[1]"
     );
 
     private final By favoriteBtn = By.xpath(
-        "//button[contains(@class,'favorites')"
-        + " or contains(@aria-label,'Избранное'" +
-                ")]"
-        + " | //a[contains(@class,'favorites')"
+        "/html/body/div[1]/div[2]/main/div/div/div[1]/div/div/article/div/div/header/div/div[2]/button"
     );
 
     public ArticlePage(WebDriver driver, WebDriverWait wait) {
@@ -56,31 +38,8 @@ public class ArticlePage extends BasePage {
         return isPresent(body) && !driver.findElement(body).getText().isBlank();
     }
 
-    public boolean hasComments() {
-        return isPresent(commentsSection);
-    }
-
-    public List<WebElement> getTags() {
-        return driver.findElements(tags);
-    }
-
-    public boolean hasTags() {
-        return !getTags().isEmpty();
-    }
-
-    public String clickFirstTagAndGetUrl() {
-        String oldUrl = driver.getCurrentUrl();
-        getTags().get(0).click();
-        wait.until(ExpectedConditions.not(ExpectedConditions.urlToBe(oldUrl)));
-        return driver.getCurrentUrl();
-    }
-
     public List<WebElement> getBreadcrumbs() {
         return driver.findElements(breadcrumbs);
-    }
-
-    public boolean hasBreadcrumbs() {
-        return !getBreadcrumbs().isEmpty();
     }
 
     public String clickBreadcrumb(int index) {
@@ -96,24 +55,5 @@ public class ArticlePage extends BasePage {
 
     public int getRelatedLinkCount() {
         return driver.findElements(relatedLinks).size();
-    }
-
-    public String clickFirstRelatedLink() {
-        String oldUrl = driver.getCurrentUrl();
-        waitClickable(relatedLinks).click();
-        wait.until(ExpectedConditions.not(ExpectedConditions.urlToBe(oldUrl)));
-        return driver.getCurrentUrl();
-    }
-
-    public boolean hasFavoriteButton() {
-        return isPresent(favoriteBtn);
-    }
-
-    public void clickFavorite() {
-        waitClickable(favoriteBtn).click();
-    }
-
-    public String getFavoriteButtonClass() {
-        return driver.findElement(favoriteBtn).getAttribute("class");
     }
 }

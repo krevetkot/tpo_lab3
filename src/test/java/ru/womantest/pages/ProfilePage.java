@@ -1,79 +1,146 @@
 package ru.womantest.pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import java.util.List;
+
+import java.time.Duration;
 
 public class ProfilePage extends BasePage {
 
-    private final By myProfileLink = By.xpath("//a[contains(@class,'user-info__name')]");
-    private final By favoritesLink = By.xpath("//a[contains(@href,'favorites')]");
-    private final By myPostsLink = By.xpath("//a[contains(@href,'threads')]");
-    private final By myRepliesLink = By.xpath("//a[contains(@href,'messages')]");
-    private final By topicsTab = By.xpath("//a[contains(@href,'threads')]");
-    private final By allTab = By.xpath("//a[contains(@href,'all')]");
-    private final By topicTitles = By.xpath("//a[contains(@class,'thread-title')]");
-    private final By moderationBadge = By.xpath(".//span[contains(@class,'moderation-badge')]");
+    private static final String PROFILE_URL = "https://www.woman.ru/user/ksenia12345678-id403945603/";
+
+    private final By profileIconBtn = By.xpath(
+            "/html/body/div[3]/header/div/div[1]/div/div/div/a/div"
+    );
+
+    private final By myProfileLink = By.xpath(
+            "/html/body/div[3]/header/div/div[1]/div/div/div/div/div[1]/a"
+    );
+
+    private final By allTab = By.xpath(
+            "/html/body/div[3]/div[4]/div/div[2]/div[2]/div[2]/div[2]/a[1]"
+    );
+
+    private final By topicsTab = By.xpath(
+            "/html/body/div[3]/div[4]/div/div[2]/div[2]/div[2]/div[2]/a[1]"
+    );
+
+    private final By favoritesTab = By.xpath(
+            "/html/body/div[3]/div[4]/div/div[2]/div[2]/div[2]/div[2]/a[3]"
+    );
+
+    private final By tabContent = By.xpath(
+            "/html/body/div[3]/div[4]/div/div[2]/div[2]/div[2]/div[3]"
+    );
+
+    private final By myPostsLink = By.xpath(
+            "/html/body/div[3]/div[4]/div/div[2]/div[2]/div[1]/a[1]"
+    );
+
+    private final By myRepliesLink = By.xpath(
+            "/html/body/div[3]/div[4]/div/div[2]/div[2]/div[1]/a[2]"
+    );
+
+    private final By achievementsLink = By.xpath(
+            "/html/body/div[3]/div[4]/div/div[2]/div[2]/div[2]/a[3]"
+    );
+
+    private final By profileRoot = By.xpath(
+            "/html/body/div[3]/div[4]"
+    );
+
+    private final By topicTitles = By.xpath("/html/body/div[3]/div[4]/div/div[2]/div[2]/div[2]/div[3]/div[1]/h2");
+    private final By moderationBadge = By.xpath("/html/body/div[3]/div[4]/div/div[2]/div[2]/div[2]/div[3]/div[1]/h2/span");
+    private final By topicCount = By.xpath("/html/body/div[3]/div[4]/div/div[2]/div[2]/div[2]/div[1]/a[1]/div[1]");
 
     public ProfilePage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }
 
-    public void openProfileDirect() {
-        driver.get("https://www.woman.ru/user/ksenia12345678-id403945603/");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(myPostsLink));
+    public void openViaIcon() {
+        waitClickable(profileIconBtn).click();
     }
 
     public void goToMyProfile() {
-        wait.until(ExpectedConditions.elementToBeClickable(myProfileLink)).click();
-        wait.until(ExpectedConditions.urlContains("/user/"));
-    }
-
-    public void goToFavorites() {
-        wait.until(ExpectedConditions.elementToBeClickable(favoritesLink)).click();
-        wait.until(ExpectedConditions.urlContains("favorites"));
-    }
-
-    public void goToMyPosts() {
-        wait.until(ExpectedConditions.elementToBeClickable(myPostsLink)).click();
-        wait.until(ExpectedConditions.urlContains("threads"));
-    }
-
-    public void goToMyReplies() {
-        wait.until(ExpectedConditions.elementToBeClickable(myRepliesLink)).click();
-        wait.until(ExpectedConditions.urlContains("messages"));
-    }
-
-    public void goToTopicsTab() {
-        wait.until(ExpectedConditions.elementToBeClickable(topicsTab)).click();
-        wait.until(ExpectedConditions.urlContains("threads"));
+        waitClickable(myProfileLink).click();
     }
 
     public void goToAllTab() {
-        wait.until(ExpectedConditions.elementToBeClickable(allTab)).click();
-        wait.until(ExpectedConditions.urlContains("all"));
+        waitClickable(allTab).click();
     }
 
-    public boolean hasTopicWithTitle(String title) {
-        List<WebElement> topics = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(topicTitles));
-        return topics.stream().anyMatch(t -> t.getText().equals(title));
+    public void goToFavoritesTab() {
+        waitClickable(favoritesTab).click();
     }
 
-    public boolean topicHasModerationBadge(String title) {
-        List<WebElement> topics = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(topicTitles));
-        for (WebElement topic : topics) {
-            if (topic.getText().equals(title)) {
-                WebElement parent = topic.findElement(By.xpath("./ancestor::div[contains(@class,'thread-container')]"));
-                return !parent.findElements(moderationBadge).isEmpty();
-            }
+    public boolean isTabContentNotEmpty() {
+        try {
+            new WebDriverWait(driver, Duration.ofSeconds(10))
+                    .until(ExpectedConditions.visibilityOfElementLocated(tabContent));
+            return !driver.findElements(tabContent).isEmpty();
+        } catch (TimeoutException e) {
+            return false;
         }
-        return false;
+    }
+
+    public void openProfileDirect() {
+        openProfilePath("");
+    }
+
+    public void goToAchievements() {
+        openProfilePath("achievements/");
+        wait.until(ExpectedConditions.urlToBe(PROFILE_URL + "achievements/"));
+    }
+
+    public void goToMyPosts() {
+        openProfilePath("threads/");
+        wait.until(ExpectedConditions.urlToBe(PROFILE_URL + "threads/"));
+    }
+
+    public void goToMyReplies() {
+        openProfilePath("messages/");
+        wait.until(ExpectedConditions.urlToBe(PROFILE_URL + "messages/"));
+    }
+
+
+    public void goToTopicsTab() {
+        waitClickable(topicsTab).click();
     }
 
     public String getCurrentUrl() {
         return driver.getCurrentUrl();
+    }
+
+    private void openProfilePath(String path) {
+        try {
+            driver.get(PROFILE_URL + path);
+        } catch (org.openqa.selenium.TimeoutException ignored) {
+            ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("window.stop();");
+        }
+        wait.until(ExpectedConditions.or(
+                ExpectedConditions.visibilityOfElementLocated(profileRoot),
+                ExpectedConditions.visibilityOfElementLocated(myPostsLink),
+                ExpectedConditions.visibilityOfElementLocated(myRepliesLink),
+                ExpectedConditions.visibilityOfElementLocated(achievementsLink)
+        ));
+    }
+
+    public boolean hasTopicWithTitle(String title) {
+        java.util.List<org.openqa.selenium.WebElement> topics = wait.until(
+                ExpectedConditions.visibilityOfAllElementsLocatedBy(topicTitles));
+        return topics.stream().anyMatch(t -> t.getText().contains(title));
+    }
+
+    public boolean topicHasModerationBadge(String title) {
+        java.util.List<org.openqa.selenium.WebElement> topics = wait.until(
+                ExpectedConditions.visibilityOfAllElementsLocatedBy(topicTitles));
+        for (org.openqa.selenium.WebElement topic : topics) {
+            if (topic.getText().contains(title)) {
+                org.openqa.selenium.WebElement parent = topic.findElement(By.xpath("./.."));
+                return !parent.findElements(moderationBadge).isEmpty();
+            }
+        }
+        return false;
     }
 }

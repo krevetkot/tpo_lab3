@@ -20,7 +20,7 @@ public class ConfigReader {
 
     public boolean hasCredentials() {
         return getEmail() != null && !getEmail().isBlank()
-            && getPassword() != null && !getPassword().isBlank();
+                && getPassword() != null && !getPassword().isBlank();
     }
 
     public String getEmail() {
@@ -29,5 +29,9 @@ public class ConfigReader {
 
     public String getPassword() {
         return props.getProperty("test.password");
+    }
+
+    public String getNickname() {
+        return props.getProperty("test.nickname");
     }
 }

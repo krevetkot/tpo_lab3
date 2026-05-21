@@ -2,32 +2,42 @@ package ru.womantest.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class CreateTopicPage extends BasePage {
 
     private final By titleInput = By.xpath(
-        "//input[@name='title' or @name='subject' or contains(@placeholder,'заголовок')"
-        + " or contains(@placeholder,'тема') or contains(@placeholder,'Тема')]"
+            "/html/body/div[5]/form[1]/div/div[2]/div[5]/input"
     );
 
     private final By bodyTextarea = By.xpath(
-        "//textarea[@name='body' or @name='text' or @name='message'"
-        + " or contains(@placeholder,'текст') or contains(@placeholder,'сообщение')]"
-        + " | //div[@contenteditable='true']"
+            "/html/body/div[5]/form[1]/div/div[2]/textarea"
     );
 
     private final By submitBtn = By.xpath(
-        "//button[@type='submit' or contains(text(),'Создать') or contains(text(),'Опубликовать')"
-        + " or contains(text(),'Добавить')]"
+            "/html/body/div[5]/form[1]/div/div[2]/div[10]/div[1]/button"
     );
 
     private final By validationError = By.xpath(
-        "//*[contains(@class,'error') or contains(@class,'invalid')"
-        + " or contains(@class,'validation')]"
-        + "[not(self::input) and not(self::textarea)]"
+            "/html/body/div[5]/form[1]/div/div[2]/div[5]/div/div[1]"
+    );
+
+    private final By bodyEditor = By.xpath(
+            "/html/body/div[5]/form[1]/div/div[2]/div[2]/div[1]"
+    );
+
+    private final By firstModalBtn = By.xpath(
+            "/html/body/div[5]/form[2]/div/div[2]/div[6]/div/button"
+    );
+
+    private final By secondModalBtn = By.xpath(
+            "/html/body/div[5]/section/div/div/div[3]/button"
     );
 
     public CreateTopicPage(WebDriver driver, WebDriverWait wait) {
@@ -35,7 +45,17 @@ public class CreateTopicPage extends BasePage {
     }
 
     public boolean isFormLoaded() {
-        return isPresent(titleInput) || isPresent(bodyTextarea);
+        try {
+            new WebDriverWait(driver, Duration.ofSeconds(10))
+                    .until(ExpectedConditions.or(
+                            ExpectedConditions.presenceOfElementLocated(titleInput),
+                            ExpectedConditions.presenceOfElementLocated(bodyEditor),
+                            ExpectedConditions.presenceOfElementLocated(bodyTextarea)
+                    ));
+            return true;
+        } catch (TimeoutException e) {
+            return false;
+        }
     }
 
     public void fillTitle(String title) {
@@ -45,29 +65,24 @@ public class CreateTopicPage extends BasePage {
     }
 
     public void fillBody(String body) {
-        By contentEditable = By.xpath("//div[@contenteditable='true']");
-        if (isPresent(contentEditable)) {
-            WebElement el = waitVisible(contentEditable);
+        try {
+            WebElement el = new WebDriverWait(driver, Duration.ofSeconds(10))
+                    .until(ExpectedConditions.visibilityOfElementLocated(bodyEditor));
             el.click();
-            ((JavascriptExecutor) driver).executeScript("arguments[0].innerHTML = arguments[1]", el, body);
-        } else {
-            WebElement el = waitVisible(bodyTextarea);
-            el.clear();
             el.sendKeys(body);
+        } catch (TimeoutException e) {
+            WebElement el = waitPresent(bodyTextarea);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].value = arguments[1];", el, body);
         }
     }
 
     public void submit() {
         waitClickable(submitBtn).click();
-    }
-
-    public ForumTopicPage submitAndExpectSuccess() {
-        submit();
-        return new ForumTopicPage(driver, wait);
+        dismissPostSubmitModals();
     }
 
     public void submitAndExpectError() {
-        submit();
+        waitClickable(submitBtn).click();
     }
 
     public boolean hasValidationError() {
@@ -76,5 +91,19 @@ public class CreateTopicPage extends BasePage {
 
     public boolean isSubmitDisabled() {
         return "true".equals(driver.findElement(submitBtn).getAttribute("disabled"));
+    }
+
+    private void dismissPostSubmitModals() {
+        dismissModalIfPresent(firstModalBtn);
+        dismissModalIfPresent(secondModalBtn);
+    }
+
+    private void dismissModalIfPresent(By btnLocator) {
+        try {
+            WebElement btn = new WebDriverWait(driver, Duration.ofSeconds(7))
+                    .until(ExpectedConditions.elementToBeClickable(btnLocator));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btn);
+        } catch (TimeoutException ignored) {
+        }
     }
 }
